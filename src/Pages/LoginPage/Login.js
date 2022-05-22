@@ -24,7 +24,7 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
 
   if (signInUser || user) {
-    navigate(from, {replace: true});
+    navigate(from, { replace: true });
   }
 
   if (signInLoading || loading) {
@@ -58,7 +58,7 @@ const Login = () => {
             })}
             type="email"
             placeholder="Email"
-            class="input input-bordered input-primary w-full max-w-md"
+            className="input input-bordered input-primary w-full max-w-md"
           />
         </div>
         {/* Error For Email */}
@@ -114,7 +114,9 @@ const Login = () => {
         </p>
 
         <p className="w-full max-w-md md:text-left text-error my-4 pl-1">
-          <small>{(signInError || error) && (signInError.message || error.message)}</small>
+          <small>
+            {(signInError || error) && (signInError.message || error.message)}
+          </small>
         </p>
         <input
           className="btn btn-primary w-full max-w-md"

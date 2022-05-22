@@ -51,7 +51,7 @@ const SignUp = () => {
             })}
             type="text"
             placeholder="Name"
-            class="input input-bordered input-primary w-full max-w-md"
+            className="input input-bordered input-primary w-full max-w-md"
           />
         </div>
         {/* Error For Name */}
@@ -77,7 +77,7 @@ const SignUp = () => {
             })}
             type="email"
             placeholder="Email"
-            class="input input-bordered input-primary w-full max-w-md"
+            className="input input-bordered input-primary w-full max-w-md"
           />
         </div>
         {/* Error For Email */}
@@ -125,9 +125,12 @@ const SignUp = () => {
           )}
         </label>
 
-            <p className=' w-full max-w-md md:text-left'>
-                Already Have An Account? <Link to='/login' className=' text-accent underline'>Please Login</Link>
-            </p>
+        <p className=" w-full max-w-md md:text-left">
+          Already Have An Account?{' '}
+          <Link to="/login" className=" text-accent underline">
+            Please Login
+          </Link>
+        </p>
 
         <p className=" w-full max-w-md md:text-left text-error my-4 pl-1">
           <small>{createError && createError.message}</small>

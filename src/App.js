@@ -6,6 +6,7 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import BusinessSummary from './Pages/HomePage/BusinessSummary';
 import Home from './Pages/HomePage/Home';
 import Machinery from './Pages/HomePage/Machinery';
+import Purchase from './Pages/HomePage/Purchase';
 import Reviews from './Pages/HomePage/Reviews';
 import Login from './Pages/LoginPage/Login';
 import SignUp from './Pages/LoginPage/SignUp';
@@ -24,6 +25,12 @@ function App() {
         <Route path="/machinery" element={<Machinery />} />
         <Route path="/business-summary" element={<BusinessSummary />} />
         <Route path="/reviews" element={<Reviews />} />
+
+        <Route path='/purchase/:id' element={
+          <RequireAuth>
+            <Purchase/>
+          </RequireAuth>
+        }></Route>
 
         <Route
           path="/dashboard"

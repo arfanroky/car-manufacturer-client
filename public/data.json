@@ -1,0 +1,50 @@
+[
+    {
+      "img": "https://i.ibb.co/M5Skz9R/img-7.png",
+      "name": "Piston",
+      "description": "You must have often seen piston in engine oils advertisements. It’s quite common among the general car parts name. An average car comes with four to six pistons in the engine. It moves when the gas passes through the combustion chamber. When the piston moves, the crankshaft also turns to run the tires and keep the car moving. The speed of the engine is dependent on how the piston moves.",
+      "quantity": 50,
+      "available_quantity": 1000,
+      "price": "$1,60.00"
+    },
+    {
+      "img": "https://i.ibb.co/gFVv6GX/img-2.png",
+      "name": "Radiator Support",
+      "description": "Car bumpers are quite common names of car body parts. It is a structure attached to the front and the rear end of the car. Designed to absorb impact from a minor collision, and suitable enough to reduce repair cost.",
+      "quantity": 60,
+      "available_quantity": 1100,
+      "price": "$1,40.61"
+    },
+    {
+      "img": "https://i.ibb.co/HF4kQBs/img-3.png",
+      "name": " Engine Fan",
+      "description": "Engine fans are popular for their reliability. The main purpose of using an engine fan is that they cool down the radiator and condenser. It helps the engine and the AC system to prevent overheating and maintain a proper operating temperature.",
+      "quantity": 80,
+      "available_quantity": 1200,
+      "price": "$2,23.96"
+    },
+    {
+      "img": "https://i.ibb.co/2yd3b56/img-4.png",
+      "name": "Grilles",
+      "description": "A grille resembles the teeth of the car. It covers the opening in the body of a vehicle to permit air to enter and exit. Most cars feature grilles at the front to protect the radiator and the engine.",
+      "quantity": 100,
+      "available_quantity": 1500,
+      "price": "$1,00.99"
+    },
+    {
+      "img": "https://i.ibb.co/ZfppFGt/img-5.png",
+      "name": "Leather Seat",
+      "description": "A car seat is the seat used in automobiles. Most car seats are made from inexpensive but durable material in order to withstand prolonged use. The most common material is polyester.",
+      "quantity": 40,
+      "available_quantity": 900,
+      "price": "$1,62.84"
+    },
+    {
+      "img": "https://i.ibb.co/w7HrJqv/img-6.png",
+      "name": "Steering Wheel",
+      "description": "The circular object that drivers move in all different directions while driving is referred to as the steering wheel. It is another car parts with names that are quite popular among drivers. Steering wheels are used to control the direction of the car. You drive in different directions or take turns using the part.",
+      "quantity": 50,
+      "available_quantity": 1600,
+      "price": "$1,21.58"
+    }
+  ]

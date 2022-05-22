@@ -20,8 +20,8 @@ const Carousel = () => {
 
         <div className="absolute top-12 left-4 md:top-1/4 md:left-28">
             <h1 className='mb-4 text-neutral text-xl uppercase tracking-tighter md:text-4xl md:tracking-wider md:font-bold'>new <span className='md:text-primary'>Technology</span> & Build </h1>
-            <p className='text-3xl font-bold mb-4 text-neutral md:text-7xl uppercase md:mb-12'>Car <span className='md:text-secondary text-info'>machinery</span> & <span className='block md:mt-5'> <span className='md:text-info'>parts</span> collections</span></p>
-            <button className='btn md:btn-primary  text-xl md:hover:bg-yellow-500 transition md:btn-xl md:text-2xl text-accent'>
+            <p className='text-3xl font-bold mb-4 text-neutral md:text-7xl uppercase md:mb-12'>Car <span className='md:text-accent text-info'>machinery</span> & <span className='block md:mt-5'> <span >parts</span> collections</span></p>
+            <button className='btn md:btn-primary  text-xl md:hover:bg-green-500 transition md:btn-xl md:text-2xl text-accent'>
                 <Link to='/purchase'>
                     Shop Now
                 </Link>
@@ -65,8 +65,8 @@ const Carousel = () => {
         </div>
         <div className="absolute top-12 left-4 md:top-1/4 md:left-28">
             <h1 className='mb-4 text-neutral text-xl uppercase tracking-tighter md:text-4xl md:tracking-wider md:font-bold'>new <span className='md:text-primary'>Technology</span> & Build </h1>
-            <p className='text-3xl font-bold mb-4 text-neutral md:text-7xl uppercase md:mb-12'>Car <span className='md:text-secondary text-info'>machinery</span> & <span className='block md:mt-5'> <span className='md:text-info'>parts</span> collections</span></p>
-            <button className='btn md:btn-primary  text-xl md:hover:bg-yellow-500 transition md:btn-xl md:text-2xl text-accent'>
+            <p className='text-3xl font-bold mb-4 text-neutral md:text-7xl uppercase md:mb-12'>Car <span className='text-accent'>machinery</span> & <span className='block md:mt-5'> <span>parts</span> collections</span></p>
+            <button className='btn md:btn-primary  text-xl md:hover:bg-green-500 transition md:btn-xl md:text-2xl text-accent'>
                 <Link to='/purchase'>
                     Shop Now
                 </Link>
