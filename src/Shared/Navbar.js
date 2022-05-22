@@ -43,10 +43,13 @@ const Navbar = () => {
             </NavLink>
             <ul class="p-2 bg-base-100">
               <li>
-                <NavLink to="/business-summary">Business Summary</NavLink>
+                <NavLink to="/reviews">Reviews</NavLink>
               </li>
               <li>
                 <NavLink to="/gallery">Gallery</NavLink>
+              </li>
+              <li>
+                <NavLink to="/business-summary">Business Summary</NavLink>
               </li>
             </ul>
           </li>
@@ -111,29 +114,32 @@ const Navbar = () => {
             <li>
               <NavLink to="/blog">Blog</NavLink>
             </li>
-            
-          <li tabIndex="0" className="mr-4">
-            <NavLink to="/machinery">
-              Machinery
-              <svg
-                class="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-              >
-                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-              </svg>
-            </NavLink>
-            <ul class="p-2 bg-base-100">
+
+            <li tabIndex="0" className="mr-4">
+              <NavLink to="/machinery">
+                Machinery
+                <svg
+                  class="fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                </svg>
+              </NavLink>
+              <ul class="p-2 bg-base-100">
               <li>
-                <NavLink to="/business-summary">Business Summary</NavLink>
+                <NavLink to="/reviews">Reviews</NavLink>
               </li>
-              <li>
-                <NavLink to="/gallery">Gallery</NavLink>
-              </li>
-            </ul>
-          </li>
+                <li>
+                  <NavLink to="/gallery">Gallery</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/business-summary">Business Summary</NavLink>
+                </li>
+              </ul>
+            </li>
             <li>
               {user ? (
                 <button className="btn btn-outline btn-error">Sign Out</button>
