@@ -106,14 +106,14 @@ const Login = () => {
           )}
         </label>
 
-        <p className="text-left pl-1">
+        <p className="md:text-left w-full max-w-md">
           New to Help Bari?{' '}
           <Link to="/sign-up" className=" text-accent underline">
             Please Sign Up
           </Link>
         </p>
 
-        <p className="text-left text-error my-4 pl-1">
+        <p className="w-full max-w-md md:text-left text-error my-4 pl-1">
           <small>{(signInError || error) && (signInError.message || error.message)}</small>
         </p>
         <input

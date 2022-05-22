@@ -20,35 +20,61 @@ const Navbar = () => {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
-            <NavLink to="/products">Products</NavLink>
-          </li>
-          <li>
-            <NavLink to="/gallery">Gallery</NavLink>
-          </li>
+
           <li>
             <NavLink to="/dashboard">Dashboard</NavLink>
           </li>
           <li>
             <NavLink to="/blog">Blog</NavLink>
           </li>
+
+          <li tabIndex="0" className="mr-4">
+            <NavLink to="/machinery">
+              Machinery
+              <svg
+                class="fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+              </svg>
+            </NavLink>
+            <ul class="p-2 bg-base-100">
+              <li>
+                <NavLink to="/business-summary">Business Summary</NavLink>
+              </li>
+              <li>
+                <NavLink to="/gallery">Gallery</NavLink>
+              </li>
+            </ul>
+          </li>
+
           <li>
-          {user ? <button
-          onClick={() => signOut(auth)}
-           className="btn btn-outline btn-error">Sign Out</button>: <>
-            <Link
-                className="btn btn-outline font-bold rounded btn-primary md:my-0 my-4 md:mr-4"
-                to="/login"
+            {user ? (
+              <button
+                onClick={() => signOut(auth)}
+                className="btn btn-outline btn-error"
               >
-                Log In
-              </Link>
-              <Link
-                className="btn btn-outline font-bold rounded btn-primary "
-                to="/sign-up"
-              >
-                Sign Up
-              </Link>
-            </>}
+                Sign Out
+              </button>
+            ) : (
+              <>
+                <Link
+                  className="btn btn-outline font-bold rounded btn-primary md:my-0 my-4 md:mr-4"
+                  to="/login"
+                >
+                  Log In
+                </Link>
+                <Link
+                  className="btn btn-outline font-bold rounded btn-primary "
+                  to="/sign-up"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </li>
         </ul>
       </div>
@@ -76,37 +102,58 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard">Dashboard</NavLink>
+            </li>
+            <li>
+              <NavLink to="/blog">Blog</NavLink>
+            </li>
+            
+          <li tabIndex="0" className="mr-4">
+            <NavLink to="/machinery">
+              Machinery
+              <svg
+                class="fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+              </svg>
+            </NavLink>
+            <ul class="p-2 bg-base-100">
               <li>
-            <NavLink to="/">Home</NavLink>
+                <NavLink to="/business-summary">Business Summary</NavLink>
+              </li>
+              <li>
+                <NavLink to="/gallery">Gallery</NavLink>
+              </li>
+            </ul>
           </li>
-          <li>
-            <NavLink to="/products">Products</NavLink>
-          </li>
-          <li>
-            <NavLink to="/gallery">Gallery</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </li>
-          <li>
-            <NavLink to="/blog">Blog</NavLink>
-          </li>
-          <li>
-            {user ? <button className="btn btn-outline btn-error">Sign Out</button>: <>
-            <Link
-                className="btn btn-outline font-bold rounded btn-primary md:my-0 my-4"
-                to="/login"
-              >
-                Log In
-              </Link>
-              <Link
-                className="btn btn-outline font-bold rounded btn-primary "
-                to="/sign-up"
-              >
-                Sign Up
-              </Link>
-            </>}
-          </li>
+            <li>
+              {user ? (
+                <button className="btn btn-outline btn-error">Sign Out</button>
+              ) : (
+                <>
+                  <Link
+                    className="btn btn-outline font-bold rounded btn-primary md:my-0 my-4"
+                    to="/login"
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    className="btn btn-outline font-bold rounded btn-primary "
+                    to="/sign-up"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </li>
           </ul>
         </div>
       </div>

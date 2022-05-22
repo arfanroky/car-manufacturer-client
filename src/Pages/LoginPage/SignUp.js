@@ -125,11 +125,11 @@ const SignUp = () => {
           )}
         </label>
 
-            <p className='text-left pl-1'>
+            <p className=' w-full max-w-md md:text-left'>
                 Already Have An Account? <Link to='/login' className=' text-accent underline'>Please Login</Link>
             </p>
 
-        <p className="text-left text-error my-4 pl-1">
+        <p className=" w-full max-w-md md:text-left text-error my-4 pl-1">
           <small>{createError && createError.message}</small>
         </p>
         <input
