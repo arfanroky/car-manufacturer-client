@@ -2,6 +2,7 @@ import React from 'react';
 import {
   useAuthState,
   useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -22,12 +23,13 @@ const Login = () => {
 
   const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
     useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 
-  if (signInUser || user) {
+  if (signInUser || user || googleUser) {
     navigate(from, { replace: true });
   }
 
-  if (signInLoading || loading) {
+  if (signInLoading || loading || googleLoading) {
     return <Spinner></Spinner>;
   }
 
@@ -115,7 +117,7 @@ const Login = () => {
 
         <p className="w-full max-w-md md:text-left text-error my-4 pl-1">
           <small>
-            {(signInError || error) && (signInError.message || error.message)}
+            {(signInError || error || googleError) && (signInError.message || error.message || googleError.message)}
           </small>
         </p>
         <input
@@ -123,6 +125,13 @@ const Login = () => {
           type="submit"
           value="Sign Up"
         />
+         <div class="divider border-t border-b border-b-primary border-t-info w-full max-w-md mx-auto">OR</div>
+            <button
+            onClick={() => signInWithGoogle()}
+             className="btn btn-accent w-full max-w-md"
+            >
+              Continue With Google
+            </button>
       </form>
     </div>
   );

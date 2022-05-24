@@ -1,5 +1,9 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
@@ -19,17 +23,21 @@ const SignUp = () => {
     createLoading,
     createError,
   ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 
-  if (createUser) {
-    navigate('/products');
+  if (createUser || googleUser) {
+    navigate('/machinery');
   }
 
-  if (createLoading) {
+  if (createLoading || updating || googleLoading) {
     return <Spinner></Spinner>;
   }
 
-  const onSubmit = (data) => {
-    createUserWithEmailAndPassword(data?.email, data?.password);
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+    console.log('update done');
   };
 
   return (
@@ -133,13 +141,20 @@ const SignUp = () => {
         </p>
 
         <p className=" w-full max-w-md md:text-left text-error my-4 pl-1">
-          <small>{createError && createError.message}</small>
+          <small>{(createError || updateError || googleError) && (createError.message || updateError.message || googleError.message)}</small>
         </p>
         <input
           className="btn btn-primary w-full max-w-md"
           type="submit"
           value="Sign Up"
         />
+          <div class="divider border-t border-b border-b-primary border-t-info w-full max-w-md mx-auto">OR</div>
+            <button
+            onClick={() => signInWithGoogle()}
+             className="btn btn-accent w-full max-w-md"
+            >
+              Continue With Google
+            </button>
       </form>
     </div>
   );

@@ -20,10 +20,49 @@ const Navbar = () => {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
+          
+          {user && (
+              <>
+                <li tabIndex="0" className="mr-4">
+                  <NavLink to="/dashboard">
+                    Dashboard
+                    <svg
+                      className="fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                    </svg>
+                  </NavLink>
+                  <ul className="p-2 bg-base-100">
+                    <li>
+                      <NavLink to="/dashboard">My Profile</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/my-orders">My Orders</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/add-review">Add A Review</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/manage-orders">Manage All Orders</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/add-product">Add A Product</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/make-admin">Make Admin</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/manage-products">Manage Products</NavLink>
+                    </li>
+                  </ul>
+                </li>
+              </>
+            )}
 
-          <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </li>
           <li>
             <NavLink to="/blog">Blog</NavLink>
           </li>
@@ -108,9 +147,49 @@ const Navbar = () => {
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </li>
+
+            {user && (
+              <>
+                <li tabIndex="0" className="mr-4">
+                  <NavLink to="/dashboard">
+                    Dashboard
+                    <svg
+                      className="fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                    </svg>
+                  </NavLink>
+                  <ul className="p-2 bg-base-100">
+                    <li>
+                      <NavLink to="/dashboard">My Profile</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/my-orders">My Orders</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/add-review">Add A Review</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/manage-orders">Manage All Orders</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/add-product">Add A Product</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/make-admin">Make Admin</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/dashboard/manage-products">Manage Products</NavLink>
+                    </li>
+                  </ul>
+                </li>
+              </>
+            )}
+
             <li>
               <NavLink to="/blog">Blog</NavLink>
             </li>

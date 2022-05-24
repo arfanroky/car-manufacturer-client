@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Equipment = ({ equipment }) => {
-  const { _id, img, name, description, quantity, available_quantity, price } =
-    equipment;
+const Items = (props) => {
+  const { name, img, description, quantity, available_quantity, price, _id } =
+    props?.product;
 
   const desc = description.slice(0, 150);
 
   return (
     <div className="col">
-      <div class="card card-compact w-96 bg-base-100 shadow-xl">
+      <div className="card card-compact w-96 bg-base-100 shadow-xl">
         <figure>
           <img src={img} alt="equipment" />
         </figure>
-        <div class="card-body">
-          <h2 class="card-title">{name}</h2>
+        <div className="card-body">
+          <h2 className="card-title">{name}</h2>
           <p>{desc}</p>
           <p>
             <span className="font-semibold text-primary text-md">Quantity</span>
@@ -31,7 +31,7 @@ const Equipment = ({ equipment }) => {
             {price}
           </p>
           <div className="card-actions justify-end">
-            <Link class="btn btn-primary btn-outline " to={`/purchase/${_id}`}>
+            <Link className="btn btn-primary btn-outline " to={`/purchase/${_id}`}>
               Purchase
             </Link>
           </div>
@@ -41,4 +41,4 @@ const Equipment = ({ equipment }) => {
   );
 };
 
-export default Equipment;
+export default Items;
