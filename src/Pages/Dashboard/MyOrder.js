@@ -20,7 +20,7 @@ const MyOrder = () => {
 
   const findOrders = async () => {
     try {
-      const { data } = await axiosPrivate.get(url);
+      const { data } = await axios.get(url);
       setOrders(data);
     } catch (error) {
       if (error.response.status === 401 || error.response.status === 403) {

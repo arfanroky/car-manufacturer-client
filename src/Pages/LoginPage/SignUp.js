@@ -29,7 +29,12 @@ const SignUp = () => {
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
+    const [token] = useToken(createUser || googleUser)
   
+    if(token){
+      navigate('/machinery')
+    }
+
 
   if (createLoading || updating || googleLoading) {
     return <Spinner></Spinner>;
@@ -43,7 +48,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-[92vh] flex flex-col justify-center items-center">
+    <div className="md:h-[92vh] flex flex-col justify-center items-center">
       <h1 className="text-5xl font-thin text-primary tracking-wider uppercase -mt-20 mb-12 ">
         Sign Up
       </h1>

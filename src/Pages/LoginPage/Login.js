@@ -32,19 +32,14 @@ const Login = () => {
     return <Spinner></Spinner>;
   }
 
+  if(user || signInUser || googleUser){
+    navigate(from, {replace: true})
+  }
+
   const onSubmit = async (e) => {
     const email = e.email;
     await signInWithEmailAndPassword(email, e?.password);
     console.log(email)
-
-    const {data} = await axios.post('http://localhost:5000/login', {email})
-    console.log(data);
-    if(data){
-      
-    }
-    localStorage.setItem(data.accessToken)
- 
-    navigate(from, {replace: true})
   };
 
   return (
