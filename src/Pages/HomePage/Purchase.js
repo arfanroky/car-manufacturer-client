@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -17,17 +17,17 @@ const Purchase = () => {
   const [user, loading] = useAuthState(auth);
   const { id } = useParams();
   const [product, setProduct] = useState({});
- const [prevQuantity, setPrevQuantity] = useState();
- const [avQuantity, setAvQuantity] = useState('');
- const [quantity, setQuantity] = useState(0)
+  const [prevQuantity, setPrevQuantity] = useState();
+  const [avQuantity, setAvQuantity] = useState('');
+  const [quantity, setQuantity] = useState(0);
 
   const { isLoading, error } = useQuery(['equipment', id], () =>
-    fetch(`http://localhost:5000/equipment/${id}`)
+    fetch(`https://sleepy-anchorage-47167.herokuapp.com/equipment/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
-        setPrevQuantity(data?.quantity)
-        setAvQuantity(data?.available_quantity)
+        setPrevQuantity(data?.quantity);
+        setAvQuantity(data?.available_quantity);
       })
   );
 
@@ -51,26 +51,29 @@ const Purchase = () => {
       productName: e.productName,
       location: e.location,
       phone: e.phone,
-      price: product?.price
+      price: product?.price,
     };
 
-    axios.post('http://localhost:5000/order', purchaseData).then(res => {
-      const {data} = res;
+    axios
+      .post('https://sleepy-anchorage-47167.herokuapp.com/order', purchaseData)
+      .then((res) => {
+        const { data } = res;
 
-      if(data){
-        console.log(data);
-        toast.success('go to dashboard click my orders and pay for the this product')
-      }
-    })
-    reset()
+        if (data) {
+          console.log(data);
+          toast.success(
+            'go to dashboard click my orders and pay for the this product'
+          );
+        }
+      });
+    reset();
   };
-
 
   return (
     <div className="md:h-[90vh] min-h-screen md:py-0 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 md:justify-items-center  items-center h-3/4 w-full mt-12 justify-items-center">
         {/* Order details */}
-         <div className="card card-compact w-96 bg-base-100 shadow-xl border-t md:mb-0 mb-12">
+        <div className="card card-compact w-96 bg-base-100 shadow-xl border-t md:mb-0 mb-12">
           <figure>
             <img src={product?.img} alt="equipment" />
           </figure>
@@ -137,7 +140,7 @@ const Purchase = () => {
                 />
               </div>
             </div>
-           
+
             <div className="w-full mb-3">
               <label
                 className="block uppercase text-md font-bold"
@@ -148,7 +151,7 @@ const Purchase = () => {
 
               <input
                 className=" w-full py-3 pl-2 outline-none border text-lg border-accent rounded uppercase text-accent "
-                type='text'
+                type="text"
                 {...register('productName')}
                 value={product.name}
                 readOnly
@@ -187,7 +190,7 @@ const Purchase = () => {
               )}
               {errors.quantity?.type === 'min' && (
                 <p className="text-error m-1">{errors.quantity.message}</p>
-            )}
+              )}
               {errors.quantity?.type === 'max' && (
                 <p className="text-error m-1">{errors.quantity.message}</p>
               )}
@@ -201,17 +204,17 @@ const Purchase = () => {
                 Location
               </label>
               <input
-              className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
-              type="text"
-              placeholder='Location'
-              {...register('location', {
-                required: {
-                  value: true,
-                  message: 'Provide a Location',
-                }
-              })}
+                className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
+                type="text"
+                placeholder="Location"
+                {...register('location', {
+                  required: {
+                    value: true,
+                    message: 'Provide a Location',
+                  },
+                })}
               />
-                {errors.location?.type === 'required' && (
+              {errors.location?.type === 'required' && (
                 <p className="text-error mt-1">{errors.location.message}</p>
               )}
             </div>
@@ -225,28 +228,26 @@ const Purchase = () => {
               </label>
 
               <input
-              className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
-              type="number"
-              placeholder='Phone'
-              {...register('phone', {
-                required: {
-                  value: true,
-                  message: 'Provide a phone Number',
-                }
-              })}
+                className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
+                type="number"
+                placeholder="Phone"
+                {...register('phone', {
+                  required: {
+                    value: true,
+                    message: 'Provide a phone Number',
+                  },
+                })}
               />
-                {errors.phone?.type === 'required' && (
+              {errors.phone?.type === 'required' && (
                 <p className="text-error mt-1">{errors.phone.message}</p>
               )}
             </div>
 
             <input
-            
               type="submit"
               value="Purchase"
               className="btn btn-accent w-full mt-4"
             />
-            
           </form>
         </div>
       </div>

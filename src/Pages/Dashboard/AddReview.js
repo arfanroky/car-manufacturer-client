@@ -3,7 +3,6 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-
 const AddReview = () => {
   const {
     register,
@@ -13,19 +12,22 @@ const AddReview = () => {
   // const [rating, setRating] = useState(0);
   // const [description, setDescription] = useState('');
 
-  const onSubmit = async e => {
-
+  const onSubmit = async (e) => {
     const review = {
-        rating: e.ratings,
-        description: e.message
+      rating: e.ratings,
+      description: e.message,
+    };
+
+    const { data } = await axios.post(
+      'https://sleepy-anchorage-47167.herokuapp.com/allReviews',
+      review
+    );
+
+    if (data) {
+      toast.success(
+        'you have added a review.. go to home page and see your review'
+      );
     }
-
-    const {data} = await axios.post('http://localhost:5000/allReviews', review);
-
-    if(data){
-      toast.success('you have added a review.. go to home page and see your review')
-    }
-
   };
 
   return (
@@ -36,11 +38,11 @@ const AddReview = () => {
         className="w-[300px] mx-auto p-5 border border-warning"
         onSubmit={handleSubmit(onSubmit)}
       >
-
-        
-
         <div className="w-full mb-3">
-          <label className="block uppercase text-md font-bold text-left" htmlFor="name">
+          <label
+            className="block uppercase text-md font-bold text-left"
+            htmlFor="name"
+          >
             Ratings
           </label>
 
@@ -75,7 +77,10 @@ const AddReview = () => {
         </div>
 
         <div className="w-full mb-3">
-          <label className="block uppercase text-md font-bold text-left" htmlFor="name">
+          <label
+            className="block uppercase text-md font-bold text-left"
+            htmlFor="name"
+          >
             Description
           </label>
 
@@ -94,8 +99,6 @@ const AddReview = () => {
             <p className="text-error mt-1">{errors.ratings.message}</p>
           )}
         </div>
-
-
 
         <input
           className="btn btn-primary w-full max-w-md"

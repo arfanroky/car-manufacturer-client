@@ -16,7 +16,7 @@ const MyOrder = () => {
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [orders, setOrders] = useState([]);
   const email = user?.email;
-  const url = `http://localhost:5000/order?email=${email}`;
+  const url = `https://sleepy-anchorage-47167.herokuapp.com/order?email=${email}`;
 
   const findOrders = async () => {
     try {
@@ -42,7 +42,7 @@ const MyOrder = () => {
   }
 
   const handleCancel = async (id) => {
-    const url = `http://localhost:5000/order/${id}`;
+    const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`;
     await axios.delete(url).then((res) => {
       const { data } = res;
       console.log(data);
@@ -55,42 +55,39 @@ const MyOrder = () => {
 
   return (
     <>
-
-    <div className=" h-screen">
-
-<div className="overflow-x-auto">
-  <table className="table w-full">
-    {/* head */}
-    <thead>
-      <tr>
-        <th />
-        <th>Name & Email</th>
-        <th>product Name</th>
-        <th>Price</th>
-        <th className='text-center'>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-    {orders.map((order, index) => (
-              <TableRow
-                order={order}
-                index={index}
-                handleCancel={handleCancel}
-                key={order._id}
-                setConfirmDelete={setConfirmDelete}
-              />
-            ))}
-    </tbody>
-  </table>
-</div>
-{confirmDelete && (
-        <DeleteDialog
-          confirmDelete={confirmDelete}
-          handleCancel={handleCancel}
-        />
-      )}
-    </div>
-      
+      <div className=" h-screen">
+        <div className="overflow-x-auto">
+          <table className="table w-full">
+            {/* head */}
+            <thead>
+              <tr>
+                <th />
+                <th>Name & Email</th>
+                <th>product Name</th>
+                <th>Price</th>
+                <th className="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order, index) => (
+                <TableRow
+                  order={order}
+                  index={index}
+                  handleCancel={handleCancel}
+                  key={order._id}
+                  setConfirmDelete={setConfirmDelete}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {confirmDelete && (
+          <DeleteDialog
+            confirmDelete={confirmDelete}
+            handleCancel={handleCancel}
+          />
+        )}
+      </div>
     </>
   );
 };
