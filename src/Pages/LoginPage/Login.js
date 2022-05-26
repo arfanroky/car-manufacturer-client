@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import {
   useAuthState,
   useSignInWithEmailAndPassword,
@@ -7,6 +8,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useToken from '../../hooks/useToken';
 import Spinner from '../../Shared/Spinner';
 
 const Login = () => {
@@ -24,17 +26,25 @@ const Login = () => {
   const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
     useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-
-  if (signInUser || user || googleUser) {
-    navigate(from, { replace: true });
-  }
-
+   
+   
   if (signInLoading || loading || googleLoading) {
     return <Spinner></Spinner>;
   }
 
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data?.email, data?.password);
+  const onSubmit = async (e) => {
+    const email = e.email;
+    await signInWithEmailAndPassword(email, e?.password);
+    console.log(email)
+
+    const {data} = await axios.post('http://localhost:5000/login', {email})
+    console.log(data);
+    if(data){
+      
+    }
+    localStorage.setItem(data.accessToken)
+ 
+    navigate(from, {replace: true})
   };
 
   return (
@@ -123,9 +133,9 @@ const Login = () => {
         <input
           className="btn btn-primary w-full max-w-md"
           type="submit"
-          value="Sign Up"
+          value="Login"
         />
-         <div class="divider border-t border-b border-b-primary border-t-info w-full max-w-md mx-auto">OR</div>
+         <div className="divider border-t border-b border-b-primary border-t-info w-full max-w-md mx-auto">OR</div>
             <button
             onClick={() => signInWithGoogle()}
              className="btn btn-accent w-full max-w-md"

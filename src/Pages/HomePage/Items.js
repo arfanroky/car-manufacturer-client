@@ -1,3 +1,5 @@
+import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -30,9 +32,9 @@ const Items = (props) => {
             <span className="font-semibold text-primary text-md">Price</span>:{' '}
             {price}
           </p>
-          <div className="card-actions justify-end">
+          <div className="card-actions justify-end ">
             <Link className="btn btn-primary btn-outline " to={`/purchase/${_id}`}>
-              Purchase
+              Purchase <FontAwesomeIcon className='ml-4 text-lg' icon={faBagShopping}/>
             </Link>
           </div>
         </div>

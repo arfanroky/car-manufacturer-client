@@ -21,6 +21,9 @@ import ManageOrders from "./Pages/Dashboard/ManageOrders";
 import AddProduct from "./Pages/Dashboard/AddProduct";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin";
 import ManageProducts from "./Pages/Dashboard/ManageProducts";
+import NotFound from "./Shared/NotFound";
+import Blog from "./Pages/HomePage/Blog";
+import Gallery from "./Pages/HomePage/Gallery";
 
 function App() {
   return (
@@ -63,6 +66,11 @@ function App() {
 
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+
+          <Route path="/blog" element={<Blog/>}></Route>
+          <Route path="/gallery" element={<Gallery/>}/>
+
+        <Route path='*' element={<NotFound/>}></Route>
       </Routes>
 
       <Footer />

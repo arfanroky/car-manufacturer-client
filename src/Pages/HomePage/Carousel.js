@@ -22,7 +22,7 @@ const Carousel = () => {
             <h1 className='mb-4 text-neutral text-xl uppercase tracking-tighter md:text-4xl md:tracking-wider md:font-bold'>new <span className='md:text-primary'>Technology</span> & Build </h1>
             <p className='text-3xl font-bold mb-4 text-neutral md:text-7xl uppercase md:mb-12'>Car <span className='md:text-accent text-info'>machinery</span> & <span className='block md:mt-5'> <span >parts</span> collections</span></p>
             <button className='btn md:btn-primary  text-xl md:hover:bg-green-500 transition md:btn-xl md:text-2xl text-accent'>
-                <Link to='/purchase'>
+                <Link to='/machinery'>
                     Shop Now
                 </Link>
             </button>
@@ -45,7 +45,7 @@ const Carousel = () => {
             <h1 className='mb-4 text-neutral text-xl uppercase tracking-tighter md:text-4xl md:tracking-wider md:font-bold'>new <span className=''>Technology</span> & Build </h1>
             <p className='text-3xl font-bold mb-4 text-neutral md:text-7xl uppercase md:mb-12'>Car <span className='md:text-info'>machinery</span> & <span className='block md:mt-5'> <span className=''>parts</span> collections</span></p>
             <button className='btn text-xl  transition md:btn-xl md:text-2xl text-accent'>
-                <Link to='/purchase'>
+                <Link to='/machinery'>
                     Shop Now
                 </Link>
             </button>
@@ -67,7 +67,7 @@ const Carousel = () => {
             <h1 className='mb-4 text-neutral text-xl uppercase tracking-tighter md:text-4xl md:tracking-wider md:font-bold'>new <span className='md:text-primary'>Technology</span> & Build </h1>
             <p className='text-3xl font-bold mb-4 text-neutral md:text-7xl uppercase md:mb-12'>Car <span className='text-accent'>machinery</span> & <span className='block md:mt-5'> <span>parts</span> collections</span></p>
             <button className='btn md:btn-primary  text-xl md:hover:bg-green-500 transition md:btn-xl md:text-2xl text-accent'>
-                <Link to='/purchase'>
+                <Link to='/machinery'>
                     Shop Now
                 </Link>
             </button>
@@ -89,7 +89,7 @@ const Carousel = () => {
             <h1 className='mb-4 text-neutral text-xl uppercase tracking-tighter md:text-4xl md:tracking-wider md:font-bold'>new <span className=''>Technology</span> & Build </h1>
             <p className='text-3xl font-bold mb-4 text-neutral md:text-7xl uppercase md:mb-12'>Car <span className='md:text-info'>machinery</span> & <span className='block md:mt-5'> <span className=''>parts</span> collections</span></p>
             <button className='btn text-xl transition md:btn-xl md:text-2xl text-accent'>
-                <Link to='/purchase'>
+                <Link to='/machinery'>
                     Shop Now
                 </Link>
             </button>

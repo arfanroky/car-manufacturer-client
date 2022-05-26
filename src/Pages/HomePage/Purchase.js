@@ -19,6 +19,7 @@ const Purchase = () => {
   const [product, setProduct] = useState({});
  const [prevQuantity, setPrevQuantity] = useState();
  const [avQuantity, setAvQuantity] = useState('');
+ const [quantity, setQuantity] = useState(0)
 
   const { isLoading, error } = useQuery(['equipment', id], () =>
     fetch(`http://localhost:5000/equipment/${id}`)
@@ -26,10 +27,7 @@ const Purchase = () => {
       .then((data) => {
         setProduct(data);
         setPrevQuantity(data?.quantity)
-        const availableQuantity = parseInt(data?.available_quantity);
-        console.log('first point', availableQuantity);
-        console.log('first point without convert parseInt', data?.available_quantity);
-        setAvQuantity(availableQuantity)
+        setAvQuantity(data?.available_quantity)
       })
   );
 
@@ -41,8 +39,10 @@ const Purchase = () => {
     toast.error(error);
   }
 
+  // console.log('av', avQuantity);
 
   const onSubmit = (e) => {
+    setQuantity(e.quantity);
     const purchaseData = {
       purchaseId: product._id,
       img: product?.img,
@@ -56,36 +56,45 @@ const Purchase = () => {
     axios.post('http://localhost:5000/order', purchaseData).then(res => {
       const {data} = res;
 
-      if(data.success){
-        const url = `http://localhost:5000/equipment/${id}`;
-        const quantity = e.quantity;
-        fetch(url, {
-          method: 'PUT', 
-          headers: {
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify({quantity})
-        })
-        .then(res => res.json())
-        .then(data => {
-          if(data){
-            if(quantity >= prevQuantity && quantity < avQuantity){
-              const avQuantityNumber = parseInt(avQuantity);
-              const quantityNumber = parseInt(quantity);
-              const result = avQuantityNumber - quantityNumber;
-              console.log('second point ',result);
-              setAvQuantity(result)
-              toast.success('success')
-            }
-          }
-        })
+      if(data){
+        console.log(data);
+        toast.success('go to dashboard click my orders and pay for the this product')
       }
+
+      // if(data.success){
+      //   const url = `http://localhost:5000/equipment/${id}`;
+      //   const inputQuantity = e.quantity;
+      //   const quantity = Number(inputQuantity)
+
+      //   console.log(typeof quantity, typeof avQuantity);
+      //   fetch(url, {
+      //     method: 'PUT', 
+      //     headers: {
+      //       'content-type': 'application/json'
+      //     },
+      //     body: JSON.stringify({quantity, avQuantity})
+      //   })
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     if(data){
+      //       console.log(data);
+      //       if(quantity >= prevQuantity && quantity < avQuantity){
+      //         const result = avQuantity - quantity;
+      //         console.log('second point ',result);
+      //         setAvQuantity(result)
+      //         toast.success('success')
+      //       }
+      //     }
+      //   })
+      // }
     })
 
   
 
     reset()
   };
+
+  console.log(quantity);
 
   return (
     <div className="md:h-[90vh] min-h-screen md:py-0 py-12">
@@ -208,7 +217,7 @@ const Purchase = () => {
               )}
               {errors.quantity?.type === 'min' && (
                 <p className="text-error m-1">{errors.quantity.message}</p>
-              )}
+            )}
               {errors.quantity?.type === 'max' && (
                 <p className="text-error m-1">{errors.quantity.message}</p>
               )}
@@ -267,6 +276,7 @@ const Purchase = () => {
               value="Purchase"
               className="btn btn-accent w-full mt-4"
             />
+            
           </form>
         </div>
       </div>

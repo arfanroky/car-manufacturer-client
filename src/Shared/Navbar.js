@@ -3,6 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import auth from '../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const [user] = useAuthState(auth);
@@ -96,7 +98,7 @@ const Navbar = () => {
                 onClick={() => signOut(auth)}
                 className="btn btn-outline btn-error"
               >
-                Sign Out
+                Sign Out <FontAwesomeIcon icon={faArrowRightFromBracket}/>
               </button>
             ) : (
               <>
@@ -217,25 +219,30 @@ const Navbar = () => {
               </ul>
             </li>
             <li>
-              {user ? (
-                <button className="btn btn-outline btn-error">Sign Out</button>
-              ) : (
-                <>
-                  <Link
-                    className="btn btn-outline font-bold rounded btn-primary md:my-0 my-4"
-                    to="/login"
-                  >
-                    Log In
-                  </Link>
-                  <Link
-                    className="btn btn-outline font-bold rounded btn-primary "
-                    to="/sign-up"
-                  >
-                    Sign Up
-                  </Link>
-                </>
-              )}
-            </li>
+            {user ? (
+              <button
+                onClick={() => signOut(auth)}
+                className="btn btn-outline btn-error"
+              >
+                Sign Out <FontAwesomeIcon icon={faArrowRightFromBracket}/>
+              </button>
+            ) : (
+              <>
+                <Link
+                  className="btn btn-outline font-bold rounded btn-primary md:my-0 my-4 md:mr-4"
+                  to="/login"
+                >
+                  Log In
+                </Link>
+                <Link
+                  className="btn btn-outline font-bold rounded btn-primary "
+                  to="/sign-up"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </li>
           </ul>
         </div>
       </div>

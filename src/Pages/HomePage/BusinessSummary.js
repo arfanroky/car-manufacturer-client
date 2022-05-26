@@ -1,10 +1,11 @@
 import {
-  faComments,
-  faFlag,
-  faFlagCheckered,
-  faLaptopCode,
-  faProjectDiagram,
-  faUser,
+
+  faGear,
+
+  faSackDollar,
+
+  faStarHalf,
+
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,25 +22,25 @@ const BusinessSummary = () => {
      </div>
       <div className=" h-1/2 grid lg:grid-cols-4 grid-cols-2 justify-items-center items-center text-center md:gap-y-0 gap-y-6">
         <div>
-            <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faFlagCheckered} /></span> 
-            <span className='block text-5xl font-bold text-accent'><CountUp end="72" />+ </span>
-            <span className="block text-xl text-primary">Countries</span>
+            <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faUsers} /></span> 
+            <span className='block text-5xl font-bold text-accent'><CountUp end="100" />K+ </span>
+            <span className="block text-xl text-primary">Happy Customers</span>
         </div>
         <div>
-          <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faLaptopCode} /> </span>
-          <span className='block text-5xl font-bold text-accent'><CountUp end="535" />+</span> 
-          <span className="block text-xl text-primary">Complete Projects</span>
+          <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faSackDollar} /> </span>
+          <span className='block text-5xl font-bold text-accent'><CountUp end="120" />M+</span> 
+          <span className="block text-xl text-primary">Annual Revenue</span>
         </div>
         <div className="">
-          <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faUsers} /> </span>
-          <span className='block text-5xl font-bold text-accent'><CountUp end="273" />+</span> 
-          <span className="block text-xl text-primary">Happy Clients</span>
+          <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faStarHalf} /> </span>
+          <span className='block text-5xl font-bold text-accent'><CountUp end="33" />K+</span> 
+          <span className="block text-xl text-primary">Reviews</span>
         </div>
 
         <div className="">
-          <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faComments} /></span> 
-          <span className='block text-5xl font-bold text-accent'><CountUp end="535" />+ </span>
-          <span className="block text-xl text-primary">Feedbacks</span>
+          <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faGear} /></span> 
+          <span className='block text-5xl font-bold text-accent'><CountUp end="50" />+ </span>
+          <span className="block text-xl text-primary">Tools</span>
         </div>
       </div>
       <div className='md:flex w-full justify-around px-2 py-12 item-center shadow-2xl -shadow-xl container mx-auto'>
