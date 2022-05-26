@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import React, { useEffect } from 'react';
 import {
   useAuthState,
@@ -13,33 +13,41 @@ import Spinner from '../../Shared/Spinner';
 
 const Login = () => {
   const [user, loading, error] = useAuthState(auth);
-  let navigate = useNavigate();
-  let location = useLocation();
-  let from = location.state?.from?.pathname || '/';
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
     useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+   const [token] = useToken(signInUser || googleUser);
    
-   
+   let navigate = useNavigate();
+   let location = useLocation();
+   let from = location.state?.from?.pathname || '/';
+ 
+   useEffect(() => {
+    if(token){
+       navigate(from, {replace: true})
+    }
+  }, [token, from, navigate])
+
+
   if (signInLoading || loading || googleLoading) {
     return <Spinner></Spinner>;
   }
 
-  if(user || signInUser || googleUser){
-    navigate(from, {replace: true})
-  }
+  
+
 
   const onSubmit = async (e) => {
-    const email = e.email;
-    await signInWithEmailAndPassword(email, e?.password);
-    console.log(email)
+    await signInWithEmailAndPassword(e.email, e?.password);
+
+  reset()    
   };
 
   return (

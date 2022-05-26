@@ -13,13 +13,11 @@ const Gallery = () => {
     <div className="min-h-screen">
         <h1 className='text-6xl font-thin text-primary my-12 text-center'>Gallery</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-items-center items-center gap-5">
-        {products.map((product) => (
-          <>
-            <div key={product._id} className={`border p-4 hover:bg-gradient-to-tr hover:from-primary hover:to-neutral transition`}>
+        {products.map((product) => <div key={product._id} className={`border p-4 hover:bg-gradient-to-tr hover:from-primary hover:to-neutral transition`}>
                 <img className='w-full' src={product.img} alt="" />
             </div>
-          </>
-        ))}
+
+        )}
       </div>
     </div>
   );

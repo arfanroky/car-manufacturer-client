@@ -20,11 +20,13 @@ const MyOrder = () => {
 
   const findOrders = async () => {
     try {
-      const { data } = await axios.get(url);
+      const { data } = await axiosPrivate.get(url);
       setOrders(data);
     } catch (error) {
+      console.log(error);
       if (error.response.status === 401 || error.response.status === 403) {
         signOut(auth);
+        localStorage.removeItem('accessToken');
         navigate('/login');
       }
     }
@@ -62,9 +64,9 @@ const MyOrder = () => {
     <thead>
       <tr>
         <th />
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
+        <th>Name & Email</th>
+        <th>product Name</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -87,31 +89,6 @@ const MyOrder = () => {
         />
       )}
     </div>
-
-
-      {/* <div className="min-h-screen">
-        <table className="table w-full ">
-          <thead>
-            <tr>
-              <th />
-              <th>Name & Email</th>
-              <th>Product Name</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody className="min-h-screen">
-            {orders.map((order, index) => (
-              <TableRow
-                order={order}
-                index={index}
-                handleCancel={handleCancel}
-                key={order._id}
-                setConfirmDelete={setConfirmDelete}
-              />
-            ))}
-          </tbody>
-        </table>
-      </div> */}
       
     </>
   );

@@ -94,7 +94,6 @@ const Purchase = () => {
     reset()
   };
 
-  console.log(quantity);
 
   return (
     <div className="md:h-[90vh] min-h-screen md:py-0 py-12">

@@ -3,9 +3,6 @@ import React from 'react';
 const SingleReview = ({review}) => {
 
     const {rating, description} = review;
-
-    console.log(rating);
-
     return (
       
         <div class="card w-96 bg-base-100 shadow-xl border border-primary">

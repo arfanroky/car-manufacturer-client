@@ -24,6 +24,8 @@ import ManageProducts from "./Pages/Dashboard/ManageProducts";
 import NotFound from "./Shared/NotFound";
 import Blog from "./Pages/HomePage/Blog";
 import Gallery from "./Pages/HomePage/Gallery";
+import RequireAdmin from "./Authentication/RequireAdmin";
+
 
 function App() {
   return (
@@ -58,10 +60,20 @@ function App() {
           <Route path="my-orders" element={<MyOrder/>}/>
           <Route path="add-review" element={<AddReview/>}/>
 
-          <Route path="manage-orders" element={<ManageOrders/>}/>
-          <Route path="add-product" element={<AddProduct/>}/>
-          <Route path="make-admin" element={<MakeAdmin/>}/>
-          <Route path="manage-products" element={<ManageProducts/>}/>
+          <Route path="manage-orders" element={<RequireAdmin>
+            <ManageOrders/>
+          </RequireAdmin>}/>
+          <Route path="add-product" element={<RequireAdmin>
+            <AddProduct/>
+          </RequireAdmin>}/>
+          <Route path="make-admin" element={<RequireAdmin>
+            <MakeAdmin/>
+          </RequireAdmin>}/>
+          <Route path="manage-products" element={<RequireAdmin>
+            <ManageProducts/>
+          </RequireAdmin>}/>
+
+
         </Route>
 
         <Route path="/sign-up" element={<SignUp />} />
