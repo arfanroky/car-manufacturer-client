@@ -26,6 +26,7 @@ import Blog from "./Pages/HomePage/Blog";
 import Gallery from "./Pages/HomePage/Gallery";
 import RequireAdmin from "./Authentication/RequireAdmin";
 import Payment from "./Pages/Dashboard/Payment";
+import MyPortfolio from "./Pages/HomePage/MyPortfolio";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/machinery" element={<Machinery />} />
         <Route path="/reviews" element={<Reviews />} />
+        <Route path="/portfolio" element={<MyPortfolio />} />
 
         <Route
           path="/purchase/:id"

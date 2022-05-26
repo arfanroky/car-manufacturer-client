@@ -12,7 +12,7 @@ import useToken from '../../hooks/useToken';
 import Spinner from '../../Shared/Spinner';
 
 const Login = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [loading, error] = useAuthState(auth);
 
   const {
     register,
@@ -130,7 +130,7 @@ const Login = () => {
 
         <p className="w-full max-w-md md:text-left text-error my-4 pl-1">
           <small>
-            {(signInError || error || googleError) && (signInError.message || error.message || googleError.message)}
+            {(signInError || googleError) && (signInError.message || googleError.message)}
           </small>
         </p>
         <input

@@ -89,8 +89,11 @@ const Navbar = () => {
           <li>
             <NavLink to="/blog">Blog</NavLink>
           </li>
+          <li>
+            <NavLink to="/portfolio">My Portfolio</NavLink>
+          </li>
 
-          <li tabIndex="0" className="mr-4">
+          {/* <li tabIndex="0" className="mr-4">
             <NavLink to="/machinery">
               Machinery
               <svg
@@ -111,7 +114,7 @@ const Navbar = () => {
                 <NavLink to="/gallery">Gallery</NavLink>
               </li>
             </ul>
-          </li>
+          </li> */}
 
           <li>
             {user ? (
@@ -223,8 +226,13 @@ const Navbar = () => {
             <li>
               <NavLink to="/blog">Blog</NavLink>
             </li>
+            
+            <li className="mr-4">
+              <NavLink to="/portfolio">My Portfolio</NavLink>
+            </li>
 
-            <li tabIndex="0" className="mr-4">
+
+            {/* <li tabIndex="0" className="mr-4">
               <NavLink to="/machinery">
                 Machinery
                 <svg
@@ -248,7 +256,7 @@ const Navbar = () => {
                   <NavLink to="/business-summary">Business Summary</NavLink>
                 </li>
               </ul>
-            </li>
+            </li> */}
             <li>
               {user ? (
                 <button onClick={logOut} className="btn btn-outline btn-error">
