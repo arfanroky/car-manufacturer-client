@@ -20,13 +20,9 @@ const DeleteDialog = ({confirmDelete, handleCancel}) => {
                 onClick={() => handleCancel(_id)}
                 className="btn btn-primary"
               >
-                Cancel
+                Confirm Cancel
                 <FontAwesomeIcon className="ml-4 text-xl" icon={faBan} />
               </button>
-
-              <label htmlFor="delete-dialog" className="btn">
-               Cancel!
-              </label>
             </div>
           </div>
         </div>

@@ -25,6 +25,7 @@ import NotFound from "./Shared/NotFound";
 import Blog from "./Pages/HomePage/Blog";
 import Gallery from "./Pages/HomePage/Gallery";
 import RequireAdmin from "./Authentication/RequireAdmin";
+import Payment from "./Pages/Dashboard/Payment";
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
           <Route index element={<MyProfile/>}></Route>
           <Route path="my-orders" element={<MyOrder/>}/>
           <Route path="add-review" element={<AddReview/>}/>
+          <Route path="payment/:id" element={<Payment/>}></Route>
 
           <Route path="manage-orders" element={<RequireAdmin>
             <ManageOrders/>

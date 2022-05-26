@@ -51,6 +51,7 @@ const Purchase = () => {
       productName: e.productName,
       location: e.location,
       phone: e.phone,
+      price: product?.price
     };
 
     axios.post('http://localhost:5000/order', purchaseData).then(res => {
@@ -60,37 +61,7 @@ const Purchase = () => {
         console.log(data);
         toast.success('go to dashboard click my orders and pay for the this product')
       }
-
-      // if(data.success){
-      //   const url = `http://localhost:5000/equipment/${id}`;
-      //   const inputQuantity = e.quantity;
-      //   const quantity = Number(inputQuantity)
-
-      //   console.log(typeof quantity, typeof avQuantity);
-      //   fetch(url, {
-      //     method: 'PUT', 
-      //     headers: {
-      //       'content-type': 'application/json'
-      //     },
-      //     body: JSON.stringify({quantity, avQuantity})
-      //   })
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     if(data){
-      //       console.log(data);
-      //       if(quantity >= prevQuantity && quantity < avQuantity){
-      //         const result = avQuantity - quantity;
-      //         console.log('second point ',result);
-      //         setAvQuantity(result)
-      //         toast.success('success')
-      //       }
-      //     }
-      //   })
-      // }
     })
-
-  
-
     reset()
   };
 

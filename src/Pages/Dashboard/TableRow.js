@@ -5,10 +5,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const TableRow = ({ order, index, handleCancel , setConfirmDelete}) => {
   // console.log(order);
-  const { _id, name, email, productName, img } = order;
+  const { _id, name, email, productName, img, price} = order;
 
   const [paid, setPaid] = useState(false);
 
@@ -32,6 +33,9 @@ const TableRow = ({ order, index, handleCancel , setConfirmDelete}) => {
             </div>
           </div>
         </td>
+        <td>
+          {price}
+        </td>
         <td className="w-full flex justify-center">
           {paid ? (
             <button className="btn btn-info">
@@ -43,16 +47,18 @@ const TableRow = ({ order, index, handleCancel , setConfirmDelete}) => {
               <label 
               onClick={() => setConfirmDelete(order)}
               htmlFor="delete-dialog" className="btn btn-primary">
-                Cancel Modal
+                Cancel
               </label>
 
       
               <button className="btn btn-accent ml-6">
-                pay{' '}
+                <Link to={`/dashboard/payment/${_id}`}>
+                  pay
                 <FontAwesomeIcon
                   className="ml-4 text-xl"
                   icon={faMoneyCheckDollar}
                 />
+                </Link>
               </button>
             </>
           )}

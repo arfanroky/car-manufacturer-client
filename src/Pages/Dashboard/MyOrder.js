@@ -66,7 +66,8 @@ const MyOrder = () => {
         <th />
         <th>Name & Email</th>
         <th>product Name</th>
-        <th>Action</th>
+        <th>Price</th>
+        <th className='text-center'>Action</th>
       </tr>
     </thead>
     <tbody>
