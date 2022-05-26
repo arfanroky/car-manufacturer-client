@@ -22,6 +22,8 @@ const Payment = () => {
     }).then((res) => res.json())
   );
 
+//   console.log(order);
+
   if (isLoading) {
     return <Spinner></Spinner>;
   }
@@ -32,18 +34,15 @@ const Payment = () => {
           <div className="card w-50  max-w-md bg-base-100 shadow-xl border border-primary mx-auto">
             <div className="card-body">
               <h2 className="card-title">
-                  Pay for {order.name}
+                  Pay for <span className='pl-1 text-primary'>{order.productName}</span>
               </h2>
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary">Buy Now</button>
-              </div>
             </div>
           </div>
 
           <div className="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100 border-primary border mx-auto mt-12">
             <div className="card-body">
             <Elements stripe={stripePromise}>
-      <CheckoutForm />
+      <CheckoutForm order={order} />
     </Elements>
             </div>
           </div>

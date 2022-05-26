@@ -9,9 +9,7 @@ import { Link } from 'react-router-dom';
 
 const TableRow = ({ order, index, handleCancel , setConfirmDelete}) => {
   // console.log(order);
-  const { _id, name, email, productName, img, price} = order;
-
-  const [paid, setPaid] = useState(false);
+  const { paid,  _id, name, email, productName, img, price} = order;
 
   return (
     <>
@@ -39,7 +37,7 @@ const TableRow = ({ order, index, handleCancel , setConfirmDelete}) => {
         <td className="w-full flex justify-center">
           {paid ? (
             <button className="btn btn-info">
-              Pending
+              paid
               <FontAwesomeIcon className="ml-4 text-xl" icon={faSpinner} />
             </button>
           ) : (
