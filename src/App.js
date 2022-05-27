@@ -27,13 +27,14 @@ import Gallery from "./Pages/HomePage/Gallery";
 import RequireAdmin from "./Authentication/RequireAdmin";
 import Payment from "./Pages/Dashboard/Payment";
 import MyPortfolio from "./Pages/HomePage/MyPortfolio";
+import Nav from "./Pages/Dashboard/Nav";
 
 
 function App() {
   return (
     <>
       <ToastContainer></ToastContainer>
-      <Navbar />
+      <Nav />
 
       <Routes>
         <Route path="/" element={<Home></Home>} />

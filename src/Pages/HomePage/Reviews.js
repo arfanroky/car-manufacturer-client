@@ -13,7 +13,7 @@ const Reviews = () => {
       .get('https://sleepy-anchorage-47167.herokuapp.com/allReviews')
       .then((res) => {
         const { data } = res;
-        setReviews(data);
+        setReviews(data.slice(0, 3));
       })
   );
 

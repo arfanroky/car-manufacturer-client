@@ -2,7 +2,7 @@ import { faBan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-const DeleteDialog = ({confirmDelete, handleCancel}) => {
+const DeleteDialog = ({confirmDelete, handleCancel, handleDelete}) => {
     const {_id, name, }  = confirmDelete;
 
 
@@ -17,7 +17,7 @@ const DeleteDialog = ({confirmDelete, handleCancel}) => {
             </h3>
             <div className="modal-action">
             <button
-                onClick={() => handleCancel(_id)}
+                onClick={() => (handleCancel(_id) || handleDelete(_id))}
                 className="btn btn-primary"
               >
                 Confirm Cancel
