@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const TableRow = ({ order, index, handleCancel , setConfirmDelete}) => {
+const TableRow = ({ order, index, handleCancel, setConfirmDelete }) => {
   // console.log(order);
-  const { paid,  _id, name, email, productName, img, price} = order;
+  const { paid, _id, name, email, productName, img, price } = order;
 
   return (
     <>
@@ -20,20 +20,18 @@ const TableRow = ({ order, index, handleCancel , setConfirmDelete}) => {
           {email}
         </td>
         <td>
-          <div class="flex items-center space-x-3">
-            <div class="avatar">
-              <div class="mask mask-squircle w-12 h-12">
+          <div className="flex items-center space-x-3">
+            <div className="avatar">
+              <div className="mask mask-squircle w-12 h-12">
                 <img src={img} alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
             <div>
-              <div class="font-bold">{productName}</div>
+              <div className="font-bold">{productName}</div>
             </div>
           </div>
         </td>
-        <td>
-          {price}
-        </td>
+        <td>{price}</td>
         <td className="w-full flex justify-center">
           {paid ? (
             <button className="btn btn-info">
@@ -42,20 +40,21 @@ const TableRow = ({ order, index, handleCancel , setConfirmDelete}) => {
             </button>
           ) : (
             <>
-              <label 
-              onClick={() => setConfirmDelete(order)}
-              htmlFor="delete-dialog" className="btn btn-primary">
+              <label
+                onClick={() => setConfirmDelete(order)}
+                htmlFor="delete-dialog"
+                className="btn btn-primary"
+              >
                 Cancel
               </label>
 
-      
               <button className="btn btn-accent ml-6">
                 <Link to={`/dashboard/payment/${_id}`}>
                   pay
-                <FontAwesomeIcon
-                  className="ml-4 text-xl"
-                  icon={faMoneyCheckDollar}
-                />
+                  <FontAwesomeIcon
+                    className="ml-4 text-xl"
+                    icon={faMoneyCheckDollar}
+                  />
                 </Link>
               </button>
             </>

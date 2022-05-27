@@ -3,12 +3,13 @@ import React from 'react';
 const Blog = () => {
   return (
     <div className="md:min-h-screen">
-        <h1 className='text-center font-thin text-5xl my-12 uppercase text-primary'>Blogs</h1>
+      <h1 className="text-center font-thin text-5xl my-12 uppercase text-primary">
+        Blogs
+      </h1>
       <div className="grid md:grid-cols-2 grid-cols-1 justify-items-center gap-6">
-
-        <div class="card w-96 bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title underline">
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title underline">
               How will you improve the performance of a React Application?
             </h2>
             <ul className="mt-5">
@@ -23,9 +24,9 @@ const Blog = () => {
           </div>
         </div>
 
-        <div class="card w-96 bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title underline">
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title underline">
               What are the different ways to manage a state in a React
               application?
             </h2>
@@ -52,9 +53,9 @@ const Blog = () => {
           </div>
         </div>
 
-        <div class="card w-96 bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title underline">
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title underline">
               how does prototype inheritance work?
             </h2>
             <p>
@@ -67,9 +68,9 @@ const Blog = () => {
           </div>
         </div>
 
-        <div class="card w-96 bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title underline">
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title underline">
               Why we do not set the state directly in React?
             </h2>
             <p>
@@ -81,9 +82,9 @@ const Blog = () => {
           </div>
         </div>
 
-        <div class="card w-96 bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title underline">
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title underline">
               What is a unit test? Why should write unit tests?
             </h2>
             <p>
@@ -95,7 +96,6 @@ const Blog = () => {
             </p>
           </div>
         </div>
-
       </div>
     </div>
   );
