@@ -36,9 +36,6 @@ const Items = (props) => {
             <Link className="btn btn-primary btn-outline " to={`/purchase/${_id}`}>
               Purchase <FontAwesomeIcon className='ml-4 text-lg' icon={faBagShopping}/>
             </Link>
-            <Link className="btn btn-error btn-outline " to={`/test/${_id}`}>
-              test <FontAwesomeIcon className='ml-4 text-lg' icon={faBagShopping}/>
-            </Link>
           </div>
         </div>
       </div>
