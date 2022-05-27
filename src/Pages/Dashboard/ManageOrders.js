@@ -7,34 +7,38 @@ import Spinner from '../../Shared/Spinner';
 import SingleOrderRow from './SingleOrderRow';
 
 const ManageOrders = () => {
-    const [confirmDelete, setConfirmDelete] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(null);
 
-    const {data:orders, isLoading} = useQuery('orders', () => fetch('http://localhost:5000/order').then(res => res.json()))
+  const { data: orders, isLoading } = useQuery('orders', () =>
+    fetch('https://sleepy-anchorage-47167.herokuapp.com/order').then((res) =>
+      res.json()
+    )
+  );
 
-    if(isLoading){
-        return <Spinner></Spinner>
-    }
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
 
+  const handleDelete = async (id) => {
+    const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`;
+    await axios.delete(url).then((res) => {
+      const { data } = res;
+      console.log(data);
+      if (data.result.deletedCount) {
+        toast.success('Delete Successfully');
+        setConfirmDelete(null);
+      }
+    });
+  };
 
-    const handleDelete = async (id) => {
-        const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`;
-        await axios.delete(url).then((res) => {
-          const { data } = res;
-          console.log(data);
-          if (data.result.deletedCount) {
-            toast.success('Delete Successfully');
-            setConfirmDelete(null);
-          }
-        });
-      };
+  return (
+    <>
+      <div className="min-h-screen">
+        <h1 className="text-center text-primary text-6xl my-12 font-thin">
+          Manage ALl Orders
+        </h1>
 
-
-    return (
-     <>
-        <div className='min-h-screen'>
-            <h1 className='text-center text-primary text-6xl my-12 font-thin'>Manage ALl Orders</h1>
-         
-            <div className="overflow-x-auto">
+        <div className="overflow-x-auto">
           <table className="table w-full">
             {/* head */}
             <thead>
@@ -59,18 +63,16 @@ const ManageOrders = () => {
             </tbody>
           </table>
         </div>
+      </div>
 
-        </div>
-
-        {confirmDelete && (
-          <DeleteDialog
-            confirmDelete={confirmDelete}
-            handleCancel={handleDelete}
-          />
-        )}
-
-     </>
-    );
+      {confirmDelete && (
+        <DeleteDialog
+          confirmDelete={confirmDelete}
+          handleCancel={handleDelete}
+        />
+      )}
+    </>
+  );
 };
 
 export default ManageOrders;

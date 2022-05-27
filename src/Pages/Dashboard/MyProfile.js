@@ -13,15 +13,17 @@ const MyProfile = () => {
   const { register, handleSubmit } = useForm();
 
   const { data, isLoading } = useQuery('user', () =>
-    axiosPrivate.get(`http://localhost:5000/user/${email}`)
+    axiosPrivate.get(
+      `https://sleepy-anchorage-47167.herokuapp.com/user/${email}`
+    )
   );
 
   if (isLoading) {
     return <Spinner></Spinner>;
   }
 
-  const {userName, education,city, age, phone, linkedin} = data?.data?.user;
-//   console.log(data.data.user.userName);
+  const { userName, education, city, age, phone, linkedin } = data?.data?.user;
+  //   console.log(data.data.user.userName);
 
   const onSubmit = (e) => {
     const profileUpdate = {
@@ -33,46 +35,52 @@ const MyProfile = () => {
       linkedin: e.linkedin,
     };
 
-   fetch(`http://localhost:5000/user/${email}`, {
-       method: 'PUT',
-       headers: {
-           'content-type': 'application/json',
+    fetch(`https://sleepy-anchorage-47167.herokuapp.com/user/${email}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
-      body: JSON.stringify(profileUpdate)
-   })
-   .then(res => res.json())
-   .then(data => {
-       if(data.success){
-           toast.success('Your profile updated');
-       }
-       else{
-           toast.error('failed to update profile')
-       }
-   })
-
+      body: JSON.stringify(profileUpdate),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success('Your profile updated');
+        } else {
+          toast.error('failed to update profile');
+        }
+      });
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="md:w-[650px] w-[400px] mx-auto px-4">
         <div className="">
-          <div class="avatar online ">
-            <div class="text-neutral-content rounded-full w-24 bg-accent">
-              <span class="uppercase text-3xl font-thin text-white">P</span>
+          <div className="avatar online ">
+            <div className="text-neutral-content rounded-full w-24 bg-accent">
+              <span className="uppercase text-3xl font-thin text-white">P</span>
             </div>
           </div>
           <div>
             <h1 className="text-success text-xl">My Profile</h1>
             <ul>
-                <li>Name: {userName}</li>
-                <li>Email: {data.data.email}</li>
-                <li>Age: {age}</li>
-                <li>Education: {education}</li>
-                <li>City: {city}</li>
-                <li>Linkedin: <a 
-                className='text-error underline'
-                href={linkedin} rel="noreferrer" target='_blank'>Linkedin Profile</a></li>
+              <li>Name: {userName}</li>
+              <li>Email: {data.data.email}</li>
+              <li>Age: {age}</li>
+              <li>Education: {education}</li>
+              <li>City: {city}</li>
+              <li>
+                Linkedin:{' '}
+                <a
+                  className="text-error underline"
+                  href={linkedin}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Linkedin Profile
+                </a>
+              </li>
             </ul>
           </div>
         </div>
