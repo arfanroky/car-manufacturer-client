@@ -11,18 +11,16 @@ const MyProfile = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const { register, handleSubmit } = useForm();
-  const {data, isLoading } = useQuery('user', () =>
+  const { data, isLoading } = useQuery('user', () =>
     axiosPrivate.get(
       `https://sleepy-anchorage-47167.herokuapp.com/user/${email}`
     )
   );
 
-
   console.log(data);
   if (isLoading) {
     return <Spinner></Spinner>;
   }
-
 
   const onSubmit = async (e) => {
     const profileUpdate = {
@@ -34,12 +32,14 @@ const MyProfile = () => {
       linkedin: e.linkedin,
     };
 
-    const {data} = await axiosPrivate.put(`http://localhost:5000/user/${email}`, profileUpdate);
-    if(data.success){
-      toast.success('profile update successfully')
-    }
-    else{
-      toast.error('failed to update profile')
+    const { data } = await axiosPrivate.put(
+      `https://sleepy-anchorage-47167.herokuapp.comuser/${email}`,
+      profileUpdate
+    );
+    if (data.success) {
+      toast.success('profile update successfully');
+    } else {
+      toast.error('failed to update profile');
     }
   };
 
@@ -54,7 +54,7 @@ const MyProfile = () => {
           </div>
           <div>
             <h1 className="text-success text-xl">My Profile</h1>
-              <ul>
+            <ul>
               <li>Name: {data?.data?.user?.userName}</li>
               <li>Email: {data.data?.email}</li>
               <li>Age: {data?.data?.user?.age}</li>
