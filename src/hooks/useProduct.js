@@ -12,7 +12,7 @@ const useProduct = () => {
     fetch('https://sleepy-anchorage-47167.herokuapp.com/equipment')
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.slice(0, 6));
+        setProducts(data);
         setIsLoading(false);
       });
   }, [products]);

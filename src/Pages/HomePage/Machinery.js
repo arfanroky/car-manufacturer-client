@@ -17,7 +17,7 @@ const Machinery = () => {
       </h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 justify-items-center gap-y-8">
         {
-        products?.map((product) => <Items key={product?._id} product={product}></Items>
+        products?.slice(0, 6).map((product) => <Items key={product?._id} product={product}></Items>
         )
         }
       </div>
