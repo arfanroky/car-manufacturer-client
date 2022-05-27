@@ -56,7 +56,7 @@ const MyProfile = () => {
             <h1 className="text-success text-xl">My Profile</h1>
             <ul>
               <li>Name: {data?.data?.user?.userName}</li>
-              <li>Email: {data.data?.email}</li>
+              <li>Email: {data?.data?.email}</li>
               <li>Age: {data?.data?.user?.age}</li>
               <li>Education: {data?.data?.user?.education}</li>
               <li>City: {data?.data?.user?.city}</li>
