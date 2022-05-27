@@ -1,4 +1,3 @@
-// import axiosPrivate from "../api/axiosPrivate";
 
 const { useState, useEffect } = require("react")
 
@@ -9,7 +8,7 @@ const useAdmin = user => {
     useEffect( () =>{
         const email = user?.email;
         if(email){
-            fetch(`//localhost:5000/admin/${email}`, {
+            fetch(`https://sleepy-anchorage-47167.herokuapp.com/admin/${email}`, {
                 method:'GET',
                 headers: {
                     'content-type': 'application/json',

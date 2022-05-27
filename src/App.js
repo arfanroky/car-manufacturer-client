@@ -28,6 +28,7 @@ import RequireAdmin from "./Authentication/RequireAdmin";
 import Payment from "./Pages/Dashboard/Payment";
 import MyPortfolio from "./Pages/HomePage/MyPortfolio";
 import Nav from "./Pages/Dashboard/Nav";
+import Test from "./Pages/Dashboard/Test";
 
 
 function App() {
@@ -51,6 +52,14 @@ function App() {
             </RequireAuth>
           }
         ></Route>
+        {/* <Route
+          path="/test/:id"
+          element={
+            <RequireAuth>
+              <Test />
+            </RequireAuth>
+          }
+        ></Route> */}
 
         <Route
           path="/dashboard"

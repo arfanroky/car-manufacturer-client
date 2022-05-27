@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import axiosPrivate from '../../api/axiosPrivate';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -11,21 +11,20 @@ const MyProfile = () => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const { register, handleSubmit } = useForm();
-
-  const { data, isLoading } = useQuery('user', () =>
+  const {data, isLoading } = useQuery('user', () =>
     axiosPrivate.get(
       `https://sleepy-anchorage-47167.herokuapp.com/user/${email}`
     )
   );
 
+
+  console.log(data);
   if (isLoading) {
     return <Spinner></Spinner>;
   }
 
-  const { userName, education, city, age, phone, linkedin } = data?.data?.user;
-  //   console.log(data.data.user.userName);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     const profileUpdate = {
       userName: e.name,
       education: e.education,
@@ -35,22 +34,13 @@ const MyProfile = () => {
       linkedin: e.linkedin,
     };
 
-    fetch(`https://sleepy-anchorage-47167.herokuapp.com/user/${email}`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-      body: JSON.stringify(profileUpdate),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          toast.success('Your profile updated');
-        } else {
-          toast.error('failed to update profile');
-        }
-      });
+    const {data} = await axiosPrivate.put(`http://localhost:5000/user/${email}`, profileUpdate);
+    if(data.success){
+      toast.success('profile update successfully')
+    }
+    else{
+      toast.error('failed to update profile')
+    }
   };
 
   return (
@@ -64,17 +54,17 @@ const MyProfile = () => {
           </div>
           <div>
             <h1 className="text-success text-xl">My Profile</h1>
-            <ul>
-              <li>Name: {userName}</li>
-              <li>Email: {data.data.email}</li>
-              <li>Age: {age}</li>
-              <li>Education: {education}</li>
-              <li>City: {city}</li>
+              <ul>
+              <li>Name: {data?.data?.user?.userName}</li>
+              <li>Email: {data.data?.email}</li>
+              <li>Age: {data?.data?.user?.age}</li>
+              <li>Education: {data?.data?.user?.education}</li>
+              <li>City: {data?.data?.user?.city}</li>
               <li>
                 Linkedin:{' '}
                 <a
                   className="text-error underline"
-                  href={linkedin}
+                  href={data?.data?.user?.linkedin}
                   rel="noreferrer"
                   target="_blank"
                 >

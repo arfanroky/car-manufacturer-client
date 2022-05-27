@@ -37,7 +37,7 @@ const Login = () => {
   }, [token, from, navigate])
 
 
-  if (signInLoading || loading || googleLoading) {
+  if (signInLoading ||  googleLoading) {
     return <Spinner></Spinner>;
   }
 

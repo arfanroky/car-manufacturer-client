@@ -6,10 +6,13 @@ import Spinner from '../../Shared/Spinner';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
+import { async } from '@firebase/util';
+
 const Purchase = () => {
   const {
     register,
+    control,
     reset,
     formState: { errors },
     handleSubmit,
@@ -17,7 +20,6 @@ const Purchase = () => {
   const [user, loading] = useAuthState(auth);
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const [prevQuantity, setPrevQuantity] = useState();
   const [avQuantity, setAvQuantity] = useState('');
   const [quantity, setQuantity] = useState(0);
 
@@ -26,10 +28,11 @@ const Purchase = () => {
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
-        setPrevQuantity(data?.quantity);
+        setQuantity(data?.quantity);
         setAvQuantity(data?.available_quantity);
       })
   );
+
 
   if (isLoading || loading) {
     return <Spinner></Spinner>;
@@ -39,10 +42,7 @@ const Purchase = () => {
     toast.error(error);
   }
 
-  // console.log('av', avQuantity);
-
-  const onSubmit = (e) => {
-    setQuantity(e.quantity);
+  const onSubmit = async (e) => {
     const purchaseData = {
       purchaseId: product._id,
       img: product?.img,
@@ -54,20 +54,18 @@ const Purchase = () => {
       price: product?.price,
     };
 
-    axios
-      .post('https://sleepy-anchorage-47167.herokuapp.com/order', purchaseData)
-      .then((res) => {
-        const { data } = res;
-
-        if (data) {
-          console.log(data);
-          toast.success(
+    const {data} = await axios.post('https://sleepy-anchorage-47167.herokuapp.com/order', purchaseData)
+     
+         if(data.success){
+            toast.success(
             'go to dashboard click my orders and pay for the this product'
           );
-        }
-      });
+         }
+        
     reset();
   };
+
+  
 
   return (
     <div className="md:h-[90vh] min-h-screen md:py-0 py-12">
@@ -84,7 +82,7 @@ const Purchase = () => {
               <span className="font-semibold text-primary text-md">
                 Quantity
               </span>
-              : {prevQuantity}
+              : {quantity}
             </p>
             <p>
               <span className="font-semibold text-primary text-md">
@@ -107,6 +105,7 @@ const Purchase = () => {
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="md:flex gap-x-3">
+
               <div className="w-full mb-3">
                 <label
                   className="block uppercase text-md font-bold"
@@ -165,25 +164,29 @@ const Purchase = () => {
               >
                 quantity
               </label>
-
-              <input
-                className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
-                placeholder={`minimum order ${product?.quantity} piece`}
-                type="number"
+              <Controller
+                render={({ field }) => <input
+                type='number'
                 {...register('quantity', {
                   required: {
                     value: true,
                     message: 'should be contain',
                   },
                   min: {
-                    value: product?.quantity,
-                    message: `you have to order At least minimum ${product?.quantity} `,
+                    value: quantity,
+                    message: `you have to order At least minimum ${quantity} `,
                   },
                   max: {
-                    value: product?.available_quantity,
-                    message: `you can't order more than availableQuantity ${product?.available_quantity}`,
+                    value: avQuantity,
+                    message: `you can't order more than availableQuantity ${avQuantity}`,
                   },
                 })}
+                 className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
+                  {...field} />}
+                name="quantity"
+                control={control}
+                defaultValue={quantity}
+         
               />
               {errors.quantity?.type === 'required' && (
                 <p className="text-error mt-1">{errors.quantity.message}</p>
