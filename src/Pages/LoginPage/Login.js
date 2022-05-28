@@ -25,7 +25,7 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
    const [token] = useToken(signInUser || googleUser);
-   
+   console.log(token);
    let navigate = useNavigate();
    let location = useLocation();
    let from = location.state?.from?.pathname || '/';

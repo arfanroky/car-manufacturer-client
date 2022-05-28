@@ -29,6 +29,7 @@ const SignUp = () => {
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
+    
     const [token] = useToken(createUser || googleUser)
   
     if(token){

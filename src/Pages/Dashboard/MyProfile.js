@@ -33,7 +33,7 @@ const MyProfile = () => {
     };
 
     const { data } = await axiosPrivate.put(
-      `https://sleepy-anchorage-47167.herokuapp.comuser/${email}`,
+      `https://sleepy-anchorage-47167.herokuapp.comuser/user?email=${email}`,
       profileUpdate
     );
     if (data.success) {
