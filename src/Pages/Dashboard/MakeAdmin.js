@@ -10,13 +10,13 @@ const MakeAdmin = () => {
 
   const { isLoading, error, refetch } = useQuery('users', () =>
     axiosPrivate
-      .get('https://sleepy-anchorage-47167.herokuapp.com/user')
+      .get('http://localhost:5000/user')
       .then((data) => {
         setUsers(data?.data);
       })
   );
 
-  // console.log(users);
+  console.log(users);
 
   if (isLoading) {
     return <Spinner></Spinner>;
