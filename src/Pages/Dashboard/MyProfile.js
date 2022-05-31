@@ -12,9 +12,7 @@ const MyProfile = () => {
   const email = user?.email;
   const { register, handleSubmit } = useForm();
   const { data, isLoading } = useQuery('user', () =>
-    axiosPrivate.get(
-      `https://sleepy-anchorage-47167.herokuapp.com/user/${email}`
-    )
+    axiosPrivate.get(`https://sleepy-anchorage-47167.herokuapp.com/${email}`)
   );
 
   console.log(data);
