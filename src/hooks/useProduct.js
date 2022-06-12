@@ -9,7 +9,7 @@ const useProduct = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://sleepy-anchorage-47167.herokuapp.com/equipment')
+    fetch('http://localhost:5000/equipment')
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

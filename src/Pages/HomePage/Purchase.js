@@ -24,7 +24,7 @@ const Purchase = () => {
   const [quantity, setQuantity] = useState(0);
 
   const { isLoading, error } = useQuery(['equipment', id], () =>
-    fetch(`https://sleepy-anchorage-47167.herokuapp.com/equipment/${id}`)
+    fetch(`http://localhost:5000/equipment/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -32,7 +32,6 @@ const Purchase = () => {
         setAvQuantity(data?.available_quantity);
       })
   );
-
 
   if (isLoading || loading) {
     return <Spinner></Spinner>;
@@ -54,18 +53,19 @@ const Purchase = () => {
       price: product?.price,
     };
 
-    const {data} = await axios.post('https://sleepy-anchorage-47167.herokuapp.com/order', purchaseData)
-     
-         if(data.success){
-            toast.success(
-            'go to dashboard click my orders and pay for the this product'
-          );
-         }
-        
+    const { data } = await axios.post(
+      'http://localhost:5000/order',
+      purchaseData
+    );
+
+    if (data.success) {
+      toast.success(
+        'go to dashboard click my orders and pay for the this product'
+      );
+    }
+
     reset();
   };
-
-  
 
   return (
     <div className="md:h-[90vh] min-h-screen md:py-0 py-12">
@@ -105,7 +105,6 @@ const Purchase = () => {
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="md:flex gap-x-3">
-
               <div className="w-full mb-3">
                 <label
                   className="block uppercase text-md font-bold"
@@ -165,28 +164,30 @@ const Purchase = () => {
                 quantity
               </label>
               <Controller
-                render={({ field }) => <input
-                type='number'
-                {...register('quantity', {
-                  required: {
-                    value: true,
-                    message: 'should be contain',
-                  },
-                  min: {
-                    value: quantity,
-                    message: `you have to order At least minimum ${quantity} `,
-                  },
-                  max: {
-                    value: avQuantity,
-                    message: `you can't order more than availableQuantity ${avQuantity}`,
-                  },
-                })}
-                 className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
-                  {...field} />}
+                render={({ field }) => (
+                  <input
+                    type="number"
+                    {...register('quantity', {
+                      required: {
+                        value: true,
+                        message: 'should be contain',
+                      },
+                      min: {
+                        value: quantity,
+                        message: `you have to order At least minimum ${quantity} `,
+                      },
+                      max: {
+                        value: avQuantity,
+                        message: `you can't order more than availableQuantity ${avQuantity}`,
+                      },
+                    })}
+                    className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
+                    {...field}
+                  />
+                )}
                 name="quantity"
                 control={control}
                 defaultValue={quantity}
-         
               />
               {errors.quantity?.type === 'required' && (
                 <p className="text-error mt-1">{errors.quantity.message}</p>

@@ -10,17 +10,17 @@ const ManageOrders = () => {
   const [confirmDelete, setConfirmDelete] = useState(null);
 
   const { data: orders, isLoading } = useQuery('orders', () =>
-    fetch('https://sleepy-anchorage-47167.herokuapp.com/order').then((res) =>
-      res.json()
-    )
+    fetch('http://localhost:5000/order').then((res) => res.json())
   );
+
+
 
   if (isLoading) {
     return <Spinner></Spinner>;
   }
 
   const handleDelete = async (id) => {
-    const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`;
+    const url = `http://localhost:5000/order/${id}`;
     await axios.delete(url).then((res) => {
       const { data } = res;
       console.log(data);

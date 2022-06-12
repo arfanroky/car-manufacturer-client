@@ -15,7 +15,7 @@ const ManageProducts = () => {
   }
 
   const handleProductDelete = async (id) => {
-    const url = `https://sleepy-anchorage-47167.herokuapp.com/equipment/${id}`;
+    const url = `http://localhost:5000/equipment/${id}`;
     await axios.delete(url).then((res) => {
       const { data } = res;
       console.log(data);

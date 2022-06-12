@@ -25,16 +25,18 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
    const [token] = useToken(signInUser || googleUser);
-   console.log(token);
+
+
    let navigate = useNavigate();
    let location = useLocation();
    let from = location.state?.from?.pathname || '/';
  
+
    useEffect(() => {
     if(token){
        navigate(from, {replace: true})
     }
-  }, [token, from, navigate])
+  }, [token, from, navigate]);
 
 
   if (signInLoading ||  googleLoading) {
@@ -42,8 +44,6 @@ const Login = () => {
   }
 
   
-
-
   const onSubmit = async (e) => {
     await signInWithEmailAndPassword(e.email, e?.password);
 

@@ -19,7 +19,7 @@ const AddReview = () => {
     };
 
     const { data } = await axios.post(
-      'https://sleepy-anchorage-47167.herokuapp.com/allReviews',
+      'http://localhost:5000/allReviews',
       review
     );
 

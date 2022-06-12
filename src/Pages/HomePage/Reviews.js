@@ -9,12 +9,10 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   const { isLoading, error } = useQuery('reviews', () =>
-    axios
-      .get('https://sleepy-anchorage-47167.herokuapp.com/allReviews')
-      .then((res) => {
-        const { data } = res;
-        setReviews(data.slice(0, 3));
-      })
+    axios.get('http://localhost:5000/allReviews').then((res) => {
+      const { data } = res;
+      setReviews(data.slice(0, 3));
+    })
   );
 
   if (isLoading) {

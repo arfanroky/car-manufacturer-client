@@ -9,16 +9,21 @@ import { toast } from 'react-toastify';
 
 const MyProfile = () => {
   const [user] = useAuthState(auth);
+
   const email = user?.email;
   const { register, handleSubmit } = useForm();
   const { data, isLoading } = useQuery('user', () =>
-    axiosPrivate.get(`https://sleepy-anchorage-47167.herokuapp.com/${email}`)
+    axiosPrivate.get(`http://localhost:5000/user/${email}`)
   );
 
-  console.log(data);
+
+
   if (isLoading) {
     return <Spinner></Spinner>;
   }
+
+  console.log(data?.data);
+  const { userName, userImg, userEmail, age, education, phone, city, linkedin } = data?.data;
 
   const onSubmit = async (e) => {
     const profileUpdate = {
@@ -31,7 +36,7 @@ const MyProfile = () => {
     };
 
     const { data } = await axiosPrivate.put(
-      `https://sleepy-anchorage-47167.herokuapp.com/user/${email}`,
+      `http://localhost:5000/user/${email}`,
       profileUpdate
     );
     if (data.success) {
@@ -41,28 +46,41 @@ const MyProfile = () => {
     }
   };
 
+  const updated = async (e) => {
+    const { data } = await axiosPrivate.put(
+      `http://localhost:5000/user/${email}`,
+    );
+    if (data.success) {
+      toast.success('profile update successfully');
+    } else {
+      toast.error('failed to update profile');
+    }
+  }
+
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="md:w-[650px] w-[400px] mx-auto px-4">
         <div className="">
           <div className="avatar online ">
-            <div className="text-neutral-content rounded-full w-24 bg-accent">
-              <span className="uppercase text-3xl font-thin text-white">P</span>
+            <div className="text-neutral-content rounded-full w-24 border-2 border-primary">
+              <img src={userImg} alt="" />
             </div>
           </div>
           <div>
             <h1 className="text-success text-xl">My Profile</h1>
             <ul>
-              <li>Name: {data?.data?.user?.userName}</li>
-              <li>Email: {data?.data?.email}</li>
-              <li>Age: {data?.data?.user?.age}</li>
-              <li>Education: {data?.data?.user?.education}</li>
-              <li>City: {data?.data?.user?.city}</li>
+              <li>Name: {userName}</li>
+              <li>Email: {userEmail}</li>
+              <li>Age: {age}</li>
+              <li>Education: {education}</li>
+              <li>City: {city}</li>
+              <li>Phone: {phone}</li>
               <li>
                 Linkedin:{' '}
                 <a
                   className="text-error underline"
-                  href={data?.data?.user?.linkedin}
+                  href={linkedin}
                   rel="noreferrer"
                   target="_blank"
                 >
@@ -80,6 +98,8 @@ const MyProfile = () => {
                 type="text"
                 placeholder="Name"
                 className="input input-bordered input-primary w-full max-w-md"
+                // value={userName}
+                contentEditable='true'
               />
             </div>
             <div className="mt-4 w-full">

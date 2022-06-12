@@ -1,0 +1,27 @@
+.scrolling-image{
+    width: 100%;
+    height: 350px;
+    background: black;
+    transition: ease-in-out 6s;
+}
+
+.perfume-stores{
+    background-image: url('../../images/portfolio/perfume-stores.png');
+    background-size: cover;
+    background-position: top;
+}
+
+.immigration{
+    background-image: url('../../images/portfolio/immigration.png');
+    background-size: cover;
+    background-position: top;
+}
+.convention{
+    background-image: url('../../images/portfolio/convention-center.png');
+    background-size: cover;
+    background-position: top;
+}
+
+.scrolling-image:hover{
+    background-position: bottom;
+}

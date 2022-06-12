@@ -37,15 +37,14 @@ const SignUp = () => {
     }
 
 
-  if (createLoading || updating || googleLoading) {
+  if (createLoading || updating || googleLoading ) {
     return <Spinner></Spinner>;
   }
 
   const onSubmit = async (e) => {
     const email = e.email;
     await createUserWithEmailAndPassword(email, e.password);
-    await updateProfile({ displayName: e.name });
-    console.log('update done');
+    await updateProfile({ displayName: e?.name });
   };
 
   return (

@@ -8,13 +8,10 @@ import AdminRow from './AdminRow';
 const MakeAdmin = () => {
   const [users, setUsers] = useState([]);
 
-  const { isLoading, error, refetch } = useQuery('users', () =>
-    axiosPrivate
-      .get('https://sleepy-anchorage-47167.herokuapp.com')
-      .then((data) => {
-        setUsers(data?.data);
-      })
-  );
+  const {data, isLoading, error, refetch } = useQuery('users', () =>
+    axiosPrivate.get('http://localhost:5000')
+    );
+    console.log(data);
 
   console.log(users);
 
