@@ -16,4 +16,6 @@ check & watch it [Live Site](https://car-manufacturer.web.app/).
 - axios
 - firebase & firebase hooks
 
-
+## Admin access
+email: ph@hero.com
+password: 123456
