@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
+import axiosPrivate from '../../api/axiosPrivate';
 import DeleteDialog from '../../Shared/DeleteDialog';
 import Spinner from '../../Shared/Spinner';
 import SingleOrderRow from './SingleOrderRow';
@@ -10,10 +11,8 @@ const ManageOrders = () => {
   const [confirmDelete, setConfirmDelete] = useState(null);
 
   const { data: orders, isLoading } = useQuery('orders', () =>
-    fetch('http://localhost:5000/order').then((res) => res.json())
+       axiosPrivate.get('http://localhost:5000/order')
   );
-
-
 
   if (isLoading) {
     return <Spinner></Spinner>;
@@ -51,7 +50,7 @@ const ManageOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order, index) => (
+              {orders?.data.map((order, index) => (
                 <SingleOrderRow
                   order={order}
                   index={index}

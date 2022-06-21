@@ -15,6 +15,7 @@ const Product = ({product, setConfirmDelete}) => {
           <img src={img} alt="equipment" />
         </figure>
         <div className="card-body">
+        
           <h2 className="card-title">{name}</h2>
           <p>{desc}</p>
           <p>

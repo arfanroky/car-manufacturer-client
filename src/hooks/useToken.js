@@ -1,10 +1,11 @@
 
 import { useEffect, useState } from 'react';
 
-
 const useToken =  (user) => {
   const [token, setToken] = useState('');
-console.log(user);
+// console.log(user);
+
+ 
   useEffect(() => {
     const email = user?.user?.reloadUserInfo.email;
     const name = user?.user?.reloadUserInfo.displayName;
@@ -13,11 +14,6 @@ console.log(user);
       userName: name,
       userImg: img,
       userEmail: email,
-      education: '',
-      city: '',
-      age: '',
-      phone: '',
-      linkedin: ''
     };
 
     if(email){

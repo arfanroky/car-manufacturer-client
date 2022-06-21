@@ -4,157 +4,126 @@ import axiosPrivate from '../../api/axiosPrivate';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Spinner from '../../Shared/Spinner';
-import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+
 
 const MyProfile = () => {
-  const [user] = useAuthState(auth);
-
-  const email = user?.email;
   const { register, handleSubmit } = useForm();
+  const [user, loading] = useAuthState(auth);
+
   const { data, isLoading } = useQuery('user', () =>
-    axiosPrivate.get(`http://localhost:5000/user/${email}`)
+  axiosPrivate.get(`http://localhost:5000/user/${user?.email}`)
   );
-
-
-
-  if (isLoading) {
+  
+  
+  if (isLoading || loading) {
     return <Spinner></Spinner>;
   }
-
-  console.log(data?.data);
-  const { userName, userImg, userEmail, age, education, phone, city, linkedin } = data?.data;
-
-  const onSubmit = async (e) => {
-    const profileUpdate = {
-      userName: e.name,
-      education: e.education,
-      city: e.city,
-      age: e.age,
-      phone: e.phone,
-      linkedin: e.linkedin,
-    };
-
-    const { data } = await axiosPrivate.put(
-      `http://localhost:5000/user/${email}`,
-      profileUpdate
-    );
-    if (data.success) {
-      toast.success('profile update successfully');
-    } else {
-      toast.error('failed to update profile');
-    }
-  };
-
-  const updated = async (e) => {
-    const { data } = await axiosPrivate.put(
-      `http://localhost:5000/user/${email}`,
-    );
-    if (data.success) {
-      toast.success('profile update successfully');
-    } else {
-      toast.error('failed to update profile');
-    }
-  }
-
+  
+  const {userName, userEmail, age, city, phone, userImg, education} = data?.data;
+  
+      const onSubmit = async (e) => {
+        const profileUpdate = {
+          userName: e.name, 
+          userEmail: e.email, 
+          education: e.education,
+          city: e.city,
+          age: e.age, 
+          phone: e.phone
+        }
+        console.log(profileUpdate);
+    
+        const { data } = await axiosPrivate.patch(
+          `http://localhost:5000/profileUpdate/${user?.email}`,
+          profileUpdate
+        );
+        if (data.success) {
+          toast.success('profile update successfully');
+        } else {
+          toast.error('failed to update profile');
+        }
+      };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="md:w-[650px] w-[400px] mx-auto px-4">
-        <div className="">
-          <div className="avatar online ">
-            <div className="text-neutral-content rounded-full w-24 border-2 border-primary">
-              <img src={userImg} alt="" />
+    <>
+ 
+      <div className="container mx-auto px-6">
+       <form 
+          className="md:w-[700px] p-4 mx-auto  shadow-2xl rounded  md:py-0 py-12 mt-12 md:mb-0 mb-12"
+           onSubmit={handleSubmit(onSubmit)}>
+           <div className=" text-center pt-12">
+           
+            {/* user img */}
+            <div className="avatar pl-4">
+              <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img src={userImg} className="text-center" alt="userImg" />
+              </div>
             </div>
+
+            {/* Edit link */}
+            <div className="md:text-xl uppercase font-normal tracking-wider text-primary ml-5 pt-4">
+              <Link to='/my-profile'>My Profile</Link>
+            </div>
+
           </div>
-          <div>
-            <h1 className="text-success text-xl">My Profile</h1>
-            <ul>
-              <li>Name: {userName}</li>
-              <li>Email: {userEmail}</li>
-              <li>Age: {age}</li>
-              <li>Education: {education}</li>
-              <li>City: {city}</li>
-              <li>Phone: {phone}</li>
-              <li>
-                Linkedin:{' '}
-                <a
-                  className="text-error underline"
-                  href={linkedin}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Linkedin Profile
-                </a>
-              </li>
-            </ul>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12">
+
+            <div>
+
+            <div className="form-control mb-4">
+           <label className="label">
+            <span className="label-text">Name</span>
+           </label>
+            <input {...register('name')} defaultValue={userName}  type="text" className=' py-2 rounded shadow-inner border-b-2 border-primary outline-none pl-2' />
+           </div>
+
+            <div className="form-control my-4">
+           <label className="label">
+            <span className="label-text">Email</span>
+           </label>
+            <input {...register('email')} defaultValue={userEmail} type="text" className=' py-2 rounded shadow-inner border-b-2 border-primary outline-none pl-2' />
+           </div>
+
+            <div className="form-control my-4">
+           <label className="label">
+            <span className="label-text">Education</span>
+           </label>
+            <input {...register('education')} defaultValue={education} type="text" className=' py-2 rounded shadow-inner border-b-2 border-primary outline-none pl-2' />
+           </div>
+
+            </div>
+
+            <div className='mb-6'>
+            <div className="form-control mb-4">
+           <label className="label">
+            <span className="label-text">Age</span>
+           </label>
+            <input {...register('age')} defaultValue={age} type="text" className=' py-2 rounded shadow-inner border-b-2 border-primary outline-none pl-2' />
+           </div>
+            <div className="form-control my-4">
+           <label className="label">
+            <span className="label-text">City</span>
+           </label>
+            <input {...register('city')} defaultValue={city} type="text" className=' py-2 rounded shadow-inner border-b-2 border-primary outline-none pl-2' />
+           </div>
+            <div className="form-control my-4">
+           <label className="label">
+            <span className="label-text">Phone</span>
+           </label>
+            <input {...register('phone')} defaultValue={phone} type="text" className=' py-2 rounded shadow-inner border-b-2 border-primary outline-none pl-2' />
+           </div>
+
+            </div>
+
           </div>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="md:flex gap-x-4 w-full">
-            <div className="mt-4 w-full">
-              <input
-                {...register('name')}
-                type="text"
-                placeholder="Name"
-                className="input input-bordered input-primary w-full max-w-md"
-                // value={userName}
-                contentEditable='true'
-              />
-            </div>
-            <div className="mt-4 w-full">
-              <input
-                {...register('education')}
-                type="text"
-                placeholder="Education?"
-                className="input input-bordered input-primary w-full max-w-md"
-              />
-            </div>
-          </div>
-          <div className="md:flex gap-x-4">
-            <div className="mt-4 w-full">
-              <input
-                {...register('city')}
-                type="text"
-                placeholder="What's your City?"
-                className="input input-bordered input-primary w-full max-w-md"
-              />
-            </div>
-            <div className="mt-4 w-full">
-              <input
-                {...register('age')}
-                type="number"
-                placeholder="What's your age?"
-                className="input input-bordered input-primary w-full max-w-md"
-              />
-            </div>
-          </div>
-          <div className="md:flex gap-x-4">
-            <div className="mt-4 w-full">
-              <input
-                {...register('phone')}
-                type="number"
-                placeholder="Phone"
-                className="input input-bordered input-primary w-full max-w-md"
-              />
-            </div>
-            <div className="mt-4 w-full">
-              <input
-                {...register('linkedin')}
-                type="url"
-                placeholder="Linkedin Profile"
-                className="input input-bordered input-primary w-full max-w-md"
-              />
-            </div>
-          </div>
-          <input
-            className="btn btn-secondary w-full my-4"
-            type="submit"
-            value="Update"
-          />
+          <input type="submit" value='Update Edit' className='py-4 px-8 mb-6 bg-primary rounded text-white text-lg tracking-widest '/>
         </form>
-      </div>
-    </div>
+            
+        </div>
+    </>
   );
 };
 

@@ -1,12 +1,9 @@
 
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Navbar from "./Shared/Navbar";
 import Machinery from './Pages/HomePage/Machinery';
-import BusinessSummary from './Pages/HomePage/BusinessSummary';
 import Reviews from './Pages/HomePage/Reviews';
 import { RequireAuth } from "./Authentication/RequireAuth";
-
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import SignUp from "./Pages/LoginPage/SignUp";
 import Login from "./Pages/LoginPage/Login";
@@ -27,7 +24,7 @@ import Gallery from "./Pages/HomePage/Gallery";
 import RequireAdmin from "./Authentication/RequireAdmin";
 import Payment from "./Pages/Dashboard/Payment";
 import MyPortfolio from "./Pages/HomePage/MyPortfolio";
-import Nav from "./Pages/Dashboard/Nav";
+import Nav from "./Shared/Nav";
 
 
 
@@ -43,7 +40,9 @@ function App() {
         <Route path="/machinery" element={<Machinery />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/portfolio" element={<MyPortfolio />} />
-
+      
+        <Route path="/my-profile" element={<MyProfile/>}/>
+    
         <Route
           path="/purchase/:id"
           element={
@@ -52,6 +51,7 @@ function App() {
             </RequireAuth>
           }
         ></Route>
+
    
 
         <Route

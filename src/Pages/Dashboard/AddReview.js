@@ -2,6 +2,10 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import auth from '../../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import axiosPrivate from '../../api/axiosPrivate';
+import Spinner from '../../Shared/Spinner';
 
 const AddReview = () => {
   const {
@@ -9,16 +13,22 @@ const AddReview = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  // const [rating, setRating] = useState(0);
-  // const [description, setDescription] = useState('');
+  
+  const [user, loading] = useAuthState(auth);
+
+  if(loading){
+    return <Spinner></Spinner>
+  }
 
   const onSubmit = async (e) => {
     const review = {
       rating: e.ratings,
       description: e.message,
+      userImg: user?.reloadUserInfo.photoUrl,
+      userName: user?.reloadUserInfo.displayName
     };
 
-    const { data } = await axios.post(
+    const { data } = await axiosPrivate.post(
       'http://localhost:5000/allReviews',
       review
     );

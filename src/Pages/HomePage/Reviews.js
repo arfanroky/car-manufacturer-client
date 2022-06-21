@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
+import axiosPrivate from '../../api/axiosPrivate';
 import Spinner from '../../Shared/Spinner';
 import SingleReview from './SingleReview';
 
@@ -9,7 +10,8 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   const { isLoading, error } = useQuery('reviews', () =>
-    axios.get('http://localhost:5000/allReviews').then((res) => {
+    axiosPrivate.get('http://localhost:5000/allReviews')
+    .then((res) => {
       const { data } = res;
       setReviews(data.slice(0, 3));
     })

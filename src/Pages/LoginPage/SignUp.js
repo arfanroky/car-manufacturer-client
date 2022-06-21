@@ -18,6 +18,7 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const [
@@ -45,6 +46,8 @@ const SignUp = () => {
     const email = e.email;
     await createUserWithEmailAndPassword(email, e.password);
     await updateProfile({ displayName: e?.name });
+
+    reset()
   };
 
   return (
