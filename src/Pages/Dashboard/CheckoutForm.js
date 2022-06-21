@@ -13,14 +13,17 @@ const CheckoutForm = ({ order }) => {
   const { _id, price, name, email } = order;
 
   useEffect(() => {
-    fetch('http://localhost:5000/create-payment-intent', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-      body: JSON.stringify({ price }),
-    })
+    fetch(
+      'https://sleepy-anchorage-47167.herokuapp.com/create-payment-intent',
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+        body: JSON.stringify({ price }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data?.clientSecret) {
@@ -77,7 +80,7 @@ const CheckoutForm = ({ order }) => {
         transactionId: paymentIntent.id,
       };
 
-      fetch(`http://localhost:5000/order/${_id}`, {
+      fetch(`https://sleepy-anchorage-47167.herokuapp.com/order/${_id}`, {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',

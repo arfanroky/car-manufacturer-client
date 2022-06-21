@@ -6,14 +6,9 @@ import Spinner from '../../Shared/Spinner';
 import AdminRow from './AdminRow';
 
 const MakeAdmin = () => {
-  const [users, setUsers] = useState([]);
-
-  const {data, isLoading, error, refetch } = useQuery('users', () =>
-    axiosPrivate.get('http://localhost:5000')
-    );
-    console.log(data);
-
-  console.log(users);
+  const { data, isLoading, error, refetch } = useQuery('users', () =>
+    axiosPrivate.get('https://sleepy-anchorage-47167.herokuapp.com/user')
+  );
 
   if (isLoading) {
     return <Spinner></Spinner>;
@@ -22,6 +17,8 @@ const MakeAdmin = () => {
   if (error) {
     toast.error(error);
   }
+
+  // console.log(data.data);
 
   return (
     <div className="overflow-x-auto">
@@ -35,7 +32,7 @@ const MakeAdmin = () => {
           </tr>
         </thead>
         <tbody>
-          {users?.map((user, index) => (
+          {data?.data.map((user, index) => (
             <AdminRow
               index={index}
               key={user._id}

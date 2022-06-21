@@ -11,7 +11,7 @@ const ManageOrders = () => {
   const [confirmDelete, setConfirmDelete] = useState(null);
 
   const { data: orders, isLoading } = useQuery('orders', () =>
-       axiosPrivate.get('http://localhost:5000/order')
+    axiosPrivate.get('https://sleepy-anchorage-47167.herokuapp.com/order')
   );
 
   if (isLoading) {
@@ -19,7 +19,7 @@ const ManageOrders = () => {
   }
 
   const handleDelete = async (id) => {
-    const url = `http://localhost:5000/order/${id}`;
+    const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`;
     await axios.delete(url).then((res) => {
       const { data } = res;
       console.log(data);

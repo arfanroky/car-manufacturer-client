@@ -16,7 +16,7 @@ const MyOrder = () => {
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [orders, setOrders] = useState([]);
   const email = user?.email;
-  const url = `http://localhost:5000/order?email=${email}`;
+  const url = `https://sleepy-anchorage-47167.herokuapp.com/order?email=${email}`;
 
   const findOrders = async () => {
     try {
@@ -42,8 +42,8 @@ const MyOrder = () => {
   }
 
   const handleCancel = async (id) => {
-    const url = `http://localhost:5000/order/${id}`;
-    const {data} = await axios.delete(url);
+    const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`;
+    const { data } = await axios.delete(url);
     if (data.result.deletedCount) {
       toast.success(data.success);
       setConfirmDelete(null);

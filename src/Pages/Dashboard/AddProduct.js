@@ -36,7 +36,7 @@ const AddProduct = () => {
             price: e.price,
           };
 
-          fetch('http://localhost:5000/equipment', {
+          fetch('https://sleepy-anchorage-47167.herokuapp.com/equipment', {
             method: 'POST',
             headers: {
               'content-type': 'application/json',

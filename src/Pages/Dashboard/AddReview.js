@@ -13,11 +13,11 @@ const AddReview = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  
+
   const [user, loading] = useAuthState(auth);
 
-  if(loading){
-    return <Spinner></Spinner>
+  if (loading) {
+    return <Spinner></Spinner>;
   }
 
   const onSubmit = async (e) => {
@@ -25,11 +25,11 @@ const AddReview = () => {
       rating: e.ratings,
       description: e.message,
       userImg: user?.reloadUserInfo.photoUrl,
-      userName: user?.reloadUserInfo.displayName
+      userName: user?.reloadUserInfo.displayName,
     };
 
     const { data } = await axiosPrivate.post(
-      'http://localhost:5000/allReviews',
+      'https://sleepy-anchorage-47167.herokuapp.com/allReviews',
       review
     );
 

@@ -24,7 +24,7 @@ const Purchase = () => {
   const [quantity, setQuantity] = useState(0);
 
   const { isLoading, error } = useQuery(['equipment', id], () =>
-    fetch(`http://localhost:5000/equipment/${id}`)
+    fetch(`https://sleepy-anchorage-47167.herokuapp.com/equipment/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -54,7 +54,7 @@ const Purchase = () => {
     };
 
     const { data } = await axios.post(
-      'http://localhost:5000/order',
+      'https://sleepy-anchorage-47167.herokuapp.com/order',
       purchaseData
     );
 
