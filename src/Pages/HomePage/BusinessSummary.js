@@ -14,44 +14,42 @@ import CountUp from 'react-countup';
 
 const BusinessSummary = () => {
   return (
-    <div className="md:h-[60vh] min-h-screen">
+    <div className=" shadow-2xl rounded-lg my-12 py-6 bg-accent">
      <div className='text-center'>
-     <h1 className='md:text-5xl text-2xl text-center font-bold uppercase mt-12 mb-4 text-primary'>millions business trust us</h1>
-      <h3 className='md:text-4xl text-xl text-center font-bold uppercase text-accent'>try to understand users expectation</h3>
+     <h1 className='md:text-5xl text-2xl text-center font-bold capitalize text-primary'>millions business trust us</h1>
+      <h3 className='md:text-3xl text-lg text-center font-bold uppercase text-white mb-6'>try to understand users expectation</h3>
 
      </div>
-      <div className=" h-1/2 grid lg:grid-cols-4 grid-cols-2 justify-items-center items-center text-center md:gap-y-0 gap-y-6">
-        <div>
-            <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faUsers} /></span> 
-            <span className='block text-5xl font-bold text-accent'><CountUp end="100" />K+ </span>
-            <span className="block text-xl text-primary">Happy Customers</span>
+
+      <div className="grid md:grid-cols-4 grid-cols-2 justify-items-center md:gap-y-0 gap-y-6 my-12">
+        <div className=' w-40'>
+            <span className='block md:text-7xl text-5xl text-primary'><FontAwesomeIcon icon={faUsers} /></span> 
+            <span className='block md:text-5xl text-2xl font-bold text-white'><CountUp end="100" />K+ </span>
+            <span className="block md:text-xl  text-lg text-primary">Happy Customers</span>
         </div>
-        <div>
-          <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faSackDollar} /> </span>
-          <span className='block text-5xl font-bold text-accent'><CountUp end="120" />M+</span> 
-          <span className="block text-xl text-primary">Annual Revenue</span>
+        <div className='w-40'>
+          <span className='block md:text-7xl text-5xl text-primary'><FontAwesomeIcon icon={faSackDollar} /> </span>
+          <span className='block md:text-5xl text-2xl font-bold text-white'><CountUp end="120" />M+</span> 
+          <span className="block md:text-xl text-lg text-primary">Annual Revenue</span>
         </div>
-        <div className="">
-          <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faStarHalf} /> </span>
-          <span className='block text-5xl font-bold text-accent'><CountUp end="33" />K+</span> 
-          <span className="block text-xl text-primary">Reviews</span>
+        <div className='w-40'>
+          <span className='block md:text-7xl text-5xl text-primary'><FontAwesomeIcon icon={faStarHalf} /> </span>
+          <span className='block md:text-5xl text-2xl font-bold text-white'><CountUp end="33" />K+</span> 
+          <span className="block md:text-xl text-lg text-primary">Reviews</span>
         </div>
 
-        <div className="">
-          <span className='block text-7xl text-primary'><FontAwesomeIcon icon={faGear} /></span> 
-          <span className='block text-5xl font-bold text-accent'><CountUp end="50" />+ </span>
-          <span className="block text-xl text-primary">Tools</span>
+        <div className='w-40'>
+          <span className='block md:text-7xl text-5xl text-primary'><FontAwesomeIcon icon={faGear} /></span> 
+          <span className='block md:text-5xl text-2xl font-bold text-white'><CountUp end="50" />+ </span>
+          <span className="block md:text-xl text-lg text-primary">Tools</span>
         </div>
       </div>
-      <div className='md:flex w-full justify-around px-2 py-12 item-center shadow-2xl -shadow-xl container mx-auto'>
-          <div>
-              <h1 className='md:text-3xl mb-2 text-2xl font-bold uppercase text-primary'>Have you any question about use or get <br /> a product Request</h1>
-              <p className='md:text-2xl mt-4 text-xl text-accent uppercase font-bold'>Don't hesitate to contact us</p>
 
-          </div>
-          <div className='flex'>
-              <button className='btn btn-primary mr-4'>Request for quote</button>
-              <button className='btn btn-accent'>Contact Us</button>
+      <div className='text-center'>
+              <h1 className='md:text-3xl text-center text-2xl font-bold text-primary '>Have you any question about use or get a product Request <p className='text-white uppercase font-bold md:text-3xl mt-3 text-xl'>Don't hesitate to contact us</p></h1>
+          <div className='flex justify-center gap-x-5 my-5 '>
+              <button className='btn text-white btn-primary '>Request for quote</button>
+              <button className='btn btn-secondary'>Contact Us</button>
           </div>
       </div>
     </div>

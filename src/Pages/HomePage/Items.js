@@ -11,7 +11,7 @@ const Items = (props) => {
 
   return (
     <div className="col">
-      <div className="card card-compact w-96 bg-base-100 shadow-xl">
+      <div className="card card-compact md:w-96 bg-base-100 shadow-xl border border-primary ">
         <figure>
           <img src={img} alt="equipment" />
         </figure>
