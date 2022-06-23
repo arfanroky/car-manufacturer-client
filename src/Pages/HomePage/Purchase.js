@@ -56,9 +56,9 @@ const Purchase = () => {
       location: e.location
     }
 
-    await axios.put(`http://localhost:5000/equipment/${id}`, {avQuantity});
+    await axios.put(`https://sleepy-anchorage-47167.herokuapp.com/${id}`, {avQuantity});
 
-    const { data } = await axios.put(`http://localhost:5000/order/${id}`,
+    const { data } = await axios.put(`https://sleepy-anchorage-47167.herokuapp.com/${id}`,
       orderData
     );
 
