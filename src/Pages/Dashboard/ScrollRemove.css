@@ -1,0 +1,15 @@
+.manageOrder{
+    overflow-y: scroll;
+}
+
+.manageOrder::-webkit-scrollbar{
+    width: 0;
+}
+
+.drawerScroll{
+    overflow-y: scroll;
+}
+
+.drawerScroll::-webkit-scrollbar{
+    width: 0;
+}

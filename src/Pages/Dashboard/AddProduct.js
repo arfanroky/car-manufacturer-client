@@ -10,7 +10,7 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm();
 
-  const imageStorageKey = '  c98da956e68ae4ac227cac3ce42b3012';
+  const imageStorageKey = '746fdeae7acdb1b2c04d8a551ef31761';
 
   const onSubmit = async (e) => {
     const image = e.image[0];
@@ -59,7 +59,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="py-12">
+    <div className="container mx-auto py-12">
       <h1 className="text-center text-5xl text-primary font-thin mb-12">
         Add A Product
       </h1>

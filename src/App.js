@@ -25,7 +25,7 @@ import RequireAdmin from "./Authentication/RequireAdmin";
 import Payment from "./Pages/Dashboard/Payment";
 import MyPortfolio from "./Pages/HomePage/MyPortfolio";
 import Nav from "./Shared/Nav";
-
+import './App.css';
 
 
 function App() {

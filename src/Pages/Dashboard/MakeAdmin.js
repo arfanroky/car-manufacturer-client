@@ -21,7 +21,9 @@ const MakeAdmin = () => {
   // console.log(data.data);
 
   return (
-    <div className="overflow-x-auto">
+ <div className="container mx-auto">
+  <h1 className='text-center md:text-5xl text-2xl font-thin text-primary my-12'>Make Admin</h1>
+     <div className="overflow-x-auto mx-6 ">
       <table className="table w-full">
         <thead>
           <tr>
@@ -43,6 +45,7 @@ const MakeAdmin = () => {
         </tbody>
       </table>
     </div>
+ </div>
   );
 };
 

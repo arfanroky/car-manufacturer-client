@@ -10,13 +10,13 @@ const Dashboard = () => {
   const [admin] = useAdmin(user);
 
   return (
-    <div className="drawer drawer-mobile">
+    <div className="drawer drawer-mobile container mx-auto">
       <input
         id="dashboard-side-nav"
         type="checkbox"
         className="drawer-toggle"
       />
-      <div className="drawer-content ">
+      <div className="drawer-content drawerScroll">
         <Outlet></Outlet>
       </div>
       <div className="drawer-side">

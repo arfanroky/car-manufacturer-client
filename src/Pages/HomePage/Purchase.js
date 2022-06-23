@@ -6,13 +6,11 @@ import Spinner from '../../Shared/Spinner';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import axios from 'axios';
-import { Controller, useForm } from 'react-hook-form';
-import { async } from '@firebase/util';
+import { useForm } from 'react-hook-form';
 
 const Purchase = () => {
   const {
     register,
-    control,
     reset,
     formState: { errors },
     handleSubmit,
@@ -20,16 +18,12 @@ const Purchase = () => {
   const [user, loading] = useAuthState(auth);
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const [avQuantity, setAvQuantity] = useState('');
-  const [quantity, setQuantity] = useState(0);
 
   const { isLoading, error } = useQuery(['equipment', id], () =>
     fetch(`https://sleepy-anchorage-47167.herokuapp.com/equipment/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
-        setQuantity(data?.quantity);
-        setAvQuantity(data?.available_quantity);
       })
   );
 
@@ -41,21 +35,31 @@ const Purchase = () => {
     toast.error(error);
   }
 
+ 
   const onSubmit = async (e) => {
-    const purchaseData = {
-      purchaseId: product._id,
-      img: product?.img,
-      name: e.userName,
-      email: e.email,
-      productName: e.productName,
-      location: e.location,
-      phone: e.phone,
-      price: product?.price,
-    };
 
-    const { data } = await axios.post(
-      'https://sleepy-anchorage-47167.herokuapp.com/order',
-      purchaseData
+
+    let prevPrice = parseInt(product.price);
+    const getPrice = prevPrice * parseInt(e.quantity);
+       prevPrice += getPrice;
+    
+    const avQuantity = parseInt(product.available_quantity) - parseInt(e.quantity);
+
+  
+    const orderData = {
+      img: product.img,
+      name: e.email,
+      email: e.userName,
+      productName: e.productName,
+      quantity: e.quantity,
+      price: prevPrice,
+      location: e.location
+    }
+
+    await axios.put(`http://localhost:5000/equipment/${id}`, {avQuantity});
+
+    const { data } = await axios.put(`http://localhost:5000/order/${id}`,
+      orderData
     );
 
     if (data.success) {
@@ -68,193 +72,169 @@ const Purchase = () => {
   };
 
   return (
-    <div className="md:h-[90vh] min-h-screen md:py-0 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 md:justify-items-center  items-center h-3/4 w-full mt-12 justify-items-center">
-        {/* Order details */}
-        <div className="card card-compact w-96 bg-base-100 shadow-xl border-t md:mb-0 mb-12">
-          <figure>
-            <img src={product?.img} alt="equipment" />
+    <div className="container mx-auto px-6">
+      <h1 className="md:text-5xl text-2xl text-center my-12 text-primary">
+        Purchase Your Order
+      </h1>
+      <form
+        className="md:w-[600px] mx-auto shadow-2xl p-6 bg-gray-100"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="grid grid-cols-3 gap-4 mb-6">
+          <figure className="col-span-1">
+            <img src={product.img} alt="" />
           </figure>
-          <div className="card-body">
-            <h2 className="card-title">{product?.name}</h2>
-            <p>{product?.description}</p>
+          <div className="col-span-2 text-justify">
+            <p>{product.description} </p>
+            <p>Available_Quantity: {product.available_quantity}</p>
             <p>
-              <span className="font-semibold text-primary text-md">
-                Quantity
-              </span>
-              : {quantity}
-            </p>
-            <p>
-              <span className="font-semibold text-primary text-md">
-                Available_Quantity
-              </span>
-              : {avQuantity}
-            </p>
-            <p className="text-info">
-              <span className="font-semibold text-primary text-md">Price</span>:{' '}
-              {product?.price}
+              Price: <span className="text-primary">${product.price}</span>{' '}
             </p>
           </div>
         </div>
-
-        {/* Purchase */}
-        <div className="md:w-3/4 card card-compact w-96 bg-base-100 shadow-xl border-t mt-8">
-          <h1 className="text-4xl text-center font-thin my-4">
-            Purchase Your Order
-          </h1>
-
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="md:flex gap-x-3">
-              <div className="w-full mb-3">
-                <label
-                  className="block uppercase text-md font-bold"
-                  htmlFor="user-name"
-                >
-                  name
-                </label>
-                <input
-                  className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
-                  type="text"
-                  name="name"
-                  {...register('userName')}
-                  value={user?.displayName ? user.displayName : 'User'}
-                  readOnly
-                />
-              </div>
-
-              <div className="w-full mb-3">
-                <label
-                  className="block uppercase text-md font-bold"
-                  htmlFor="email"
-                >
-                  Email
-                </label>
-                <input
-                  className=" w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
-                  type="email"
-                  {...register('email')}
-                  value={user?.email}
-                  readOnly
-                />
-              </div>
-            </div>
-
-            <div className="w-full mb-3">
-              <label
-                className="block uppercase text-md font-bold"
-                htmlFor="product-name"
-              >
-                Product name
-              </label>
-
-              <input
-                className=" w-full py-3 pl-2 outline-none border text-lg border-accent rounded uppercase text-accent "
-                type="text"
-                {...register('productName')}
-                value={product.name}
-                readOnly
-              />
-            </div>
-
-            <div className="w-full mb-3">
-              <label
-                className="block uppercase text-md font-bold"
-                htmlFor="name"
-              >
-                quantity
-              </label>
-              <Controller
-                render={({ field }) => (
-                  <input
-                    type="number"
-                    {...register('quantity', {
-                      required: {
-                        value: true,
-                        message: 'should be contain',
-                      },
-                      min: {
-                        value: quantity,
-                        message: `you have to order At least minimum ${quantity} `,
-                      },
-                      max: {
-                        value: avQuantity,
-                        message: `you can't order more than availableQuantity ${avQuantity}`,
-                      },
-                    })}
-                    className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
-                    {...field}
-                  />
-                )}
-                name="quantity"
-                control={control}
-                defaultValue={quantity}
-              />
-              {errors.quantity?.type === 'required' && (
-                <p className="text-error mt-1">{errors.quantity.message}</p>
-              )}
-              {errors.quantity?.type === 'min' && (
-                <p className="text-error m-1">{errors.quantity.message}</p>
-              )}
-              {errors.quantity?.type === 'max' && (
-                <p className="text-error m-1">{errors.quantity.message}</p>
-              )}
-            </div>
-
-            <div className="w-full mb-3">
-              <label
-                className="block uppercase text-md font-bold"
-                htmlFor="location"
-              >
-                Location
-              </label>
-              <input
-                className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
-                type="text"
-                placeholder="Location"
-                {...register('location', {
-                  required: {
-                    value: true,
-                    message: 'Provide a Location',
-                  },
-                })}
-              />
-              {errors.location?.type === 'required' && (
-                <p className="text-error mt-1">{errors.location.message}</p>
-              )}
-            </div>
-
-            <div className="w-full mb-3">
-              <label
-                className="block uppercase text-md font-bold"
-                htmlFor="phone"
-              >
-                phone
-              </label>
-
-              <input
-                className="w-full py-3 pl-2 outline-none border text-lg border-accent rounded"
-                type="number"
-                placeholder="Phone"
-                {...register('phone', {
-                  required: {
-                    value: true,
-                    message: 'Provide a phone Number',
-                  },
-                })}
-              />
-              {errors.phone?.type === 'required' && (
-                <p className="text-error mt-1">{errors.phone.message}</p>
-              )}
-            </div>
-
+        <div className="md:flex gap-x-3">
+          <div className="w-full mb-3">
+            <label
+              className="block uppercase text-md font-bold"
+              htmlFor="user-name"
+            >
+              name
+            </label>
             <input
-              type="submit"
-              value="Purchase"
-              className="btn btn-accent w-full mt-4"
+              className="w-full py-3 pl-2 outline-none text-lg shadow-lg rounded"
+              type="text"
+              {...register('userName')}
+              value={user?.displayName ? user.displayName : 'User'}
+              readOnly
             />
-          </form>
+          </div>
+
+          <div className="w-full mb-3">
+            <label
+              className="block uppercase text-md font-bold"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              className=" w-full py-3 pl-2 outline-none text-lg  rounded shadow-lg"
+              type="email"
+              {...register('email')}
+              value={user?.email}
+              readOnly
+            />
+          </div>
         </div>
-      </div>
+
+        <div className="md:flex gap-x-3">
+          <div className="w-full mb-3">
+            <label
+              className="block uppercase text-md font-bold"
+              htmlFor="product-name"
+            >
+              Product Name
+            </label>
+            <input
+              className="w-full py-3 pl-2 outline-none text-lg shadow-lg rounded"
+              type="text"
+              {...register('productName')}
+              value={product.name}
+              readOnly
+            />
+          </div>
+
+          <div className="w-full mb-3">
+            <label className="block capitalize text-sm" htmlFor="quantity">
+              Minimum Quantity
+            </label>
+            <input
+              className=" w-full py-3 pl-2 outline-none  text-lg rounded shadow-md"
+              type="text"
+              {...register('quantity', {
+                required: {
+                  value: true,
+                  message: 'Quantity is Required',
+                },
+                min: {
+                  value: product.quantity,
+                  message: `You have to Order more than ${product.quantity}`,
+                },
+                max: {
+                  value: product.available_quantity,
+                  message: `You should order under the maximum ${product.available_quantity}`,
+                },
+              })}
+              defaultValue={product.quantity}
+            />
+            {errors.quantity?.type === 'required' && (
+              <span className="label-text-alt text-red-500">
+                {errors.quantity.message}
+              </span>
+            )}
+            {errors.quantity?.type === 'min' && (
+              <span className="label-text-alt text-red-500">
+                {errors.quantity.message}
+              </span>
+            )}
+            {errors.quantity?.type === 'max' && (
+              <span className="label-text-alt text-red-500">
+                {errors.quantity.message}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="md:flex gap-x-3">
+          <div className="w-full mb-3">
+            <label
+              className="block uppercase text-md font-bold"
+              htmlFor="location"
+            >
+              Location
+            </label>
+            <select
+              class=" w-full py-3 pl-2 outline-none text-lg shadow-lg rounded"
+              {...register('location')}
+            >
+              <option>Bangladesh</option>
+              <option>America</option>
+              <option>Switzerland</option>
+              <option>England</option>
+            </select>
+          </div>
+
+          <div className="w-full mb-3">
+            <label
+              className="block uppercase text-md font-bold"
+              htmlFor="quantity"
+            >
+              Phone
+            </label>
+            <input
+              className=" w-full py-3 pl-2 outline-none  text-lg rounded shadow-md"
+              type="tel"
+              {...register('phone', {
+                required: {
+                  value: true,
+                  message: 'Phone is Required',
+                },
+              })}
+              placeholder="Phone"
+            />
+            {errors.phone?.type === 'required' && (
+              <span className="label-text-alt text-red-500">
+                {errors.phone.message}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <input
+          type="submit"
+          value="Purchase"
+          className="btn btn-accent w-full mt-4"
+        />
+      </form>
     </div>
   );
 };

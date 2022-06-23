@@ -5,6 +5,8 @@ import React from 'react';
 const DeleteDialog = ({confirmDelete, handleCancel, handleDelete, handleProductDelete}) => {
     const {_id, name, }  = confirmDelete;
 
+    // console.log(handleProductDelete)
+
     return (
         <>
         {/* Put this part before </body> tag */}
@@ -15,15 +17,15 @@ const DeleteDialog = ({confirmDelete, handleCancel, handleDelete, handleProductD
               Are You sure you want to delete {name}
             </h3>
             <div className="modal-action">
+            {(handleCancel || handleDelete || handleProductDelete) &&  
             <button
-                onClick={() => (handleCancel(_id) || handleDelete(_id) || handleProductDelete(_id))}
+                onClick={() =>  handleProductDelete(_id)}
                 className="btn btn-primary"
               >
-                {
-                  handleProductDelete ? 'Confirm Delete': 'Confirm Cancel'
-                }
+                Delete
                 <FontAwesomeIcon className="ml-4 text-xl" icon={faBan} />
-              </button>
+              </button>}
+              
             </div>
           </div>
         </div>

@@ -26,13 +26,16 @@ const ManageProducts = () => {
     });
   };
 
+
+  
+
   return (
     <>
-      <div className="container-fluid py-12">
+      <div className="container mx-auto py-12 ">
         <h1 className="text-center md:text-6xl font-thin text-primary text-3xl font-serif">
           Equipments
         </h1>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 justify-items-center gap-y-8">
+        <div className="grid md:grid-cols-2 grid-cols-1 justify-items-center gap-y-8 ">
           {products?.map((product) => (
             <Product
               key={product?._id}
