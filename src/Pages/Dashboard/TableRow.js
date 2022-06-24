@@ -42,7 +42,7 @@ const TableRow = ({ order, index, handleCancel, setConfirmDelete }) => {
             <>
               <label
                 onClick={() => setConfirmDelete(order)}
-                htmlFor="delete-dialog"
+                htmlFor="handleDelete"
                 className="btn btn-primary"
               >
                 Cancel

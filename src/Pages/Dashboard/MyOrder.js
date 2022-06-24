@@ -9,31 +9,37 @@ import auth from '../../firebase.init';
 import DeleteDialog from '../../Shared/DeleteDialog';
 import Spinner from '../../Shared/Spinner';
 import TableRow from './TableRow';
+import { useQuery } from 'react-query';
 
 const MyOrder = () => {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [orders, setOrders] = useState([]);
-  const email = user?.email;
-  const url = `https://sleepy-anchorage-47167.herokuapp.com/order?email=${email}`;
 
-  const findOrders = async () => {
-    try {
-      const { data } = await axiosPrivate.get(url);
-      setOrders(data);
-    } catch (error) {
-      console.log(error);
-      if (error.response.status === 401 || error.response.status === 403) {
-        signOut(auth);
-        localStorage.removeItem('accessToken');
-        navigate('/login');
-      }
-    }
-  };
-  findOrders();
+  const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${user?.email}`;
+  console.log(user?.email);
 
-  if (loading) {
+  const { isLoading } = useQuery(
+    'orderItem',
+    async () =>
+      await axiosPrivate
+        .get(url)
+        .then((res) => {
+          setOrders(res.data);
+        })
+        .catch((error) => {
+          if (error.response.status === 401 || error.response.status === 403) {
+            signOut(auth);
+            localStorage.removeItem('accessToken');
+            navigate('/login');
+          }
+        })
+  );
+
+  // console.log(orderItem);
+
+  if (isLoading || loading) {
     return <Spinner></Spinner>;
   }
 
@@ -41,8 +47,7 @@ const MyOrder = () => {
     toast.error(error);
   }
 
-
-  const handleCancel = async (id) => {
+  const handleDelete = async (id) => {
     const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`;
     const { data } = await axios.delete(url);
     if (data.result.deletedCount) {
@@ -71,7 +76,7 @@ const MyOrder = () => {
                 <TableRow
                   order={order}
                   index={index}
-                  handleCancel={handleCancel}
+                  handleDelete={handleDelete}
                   key={order._id}
                   setConfirmDelete={setConfirmDelete}
                 />
@@ -82,7 +87,7 @@ const MyOrder = () => {
         {confirmDelete && (
           <DeleteDialog
             confirmDelete={confirmDelete}
-            handleCancel={handleCancel}
+            handleDelete={handleDelete}
           />
         )}
       </div>

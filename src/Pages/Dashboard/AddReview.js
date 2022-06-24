@@ -41,7 +41,7 @@ const AddReview = () => {
   };
 
   return (
-    <div className='container mx-auto'>
+    <div className="container mx-auto">
       <h1>Add A Review</h1>
 
       <form

@@ -35,30 +35,31 @@ const Purchase = () => {
     toast.error(error);
   }
 
- 
   const onSubmit = async (e) => {
-
-
     let prevPrice = parseInt(product.price);
     const getPrice = prevPrice * parseInt(e.quantity);
-       prevPrice += getPrice;
-    
-    const avQuantity = parseInt(product.available_quantity) - parseInt(e.quantity);
+    prevPrice += getPrice;
 
-  
+    const avQuantity =
+      parseInt(product.available_quantity) - parseInt(e.quantity);
+
     const orderData = {
       img: product.img,
-      name: e.email,
-      email: e.userName,
+      name: e.userName,
+      email: e.email,
       productName: e.productName,
       quantity: e.quantity,
       price: prevPrice,
-      location: e.location
-    }
+      location: e.location,
+    };
 
-    await axios.put(`https://sleepy-anchorage-47167.herokuapp.com/${id}`, {avQuantity});
+    await axios.put(
+      `https://sleepy-anchorage-47167.herokuapp.com/equipment/${id}`,
+      { avQuantity }
+    );
 
-    const { data } = await axios.put(`https://sleepy-anchorage-47167.herokuapp.com/${id}`,
+    const { data } = await axios.put(
+      `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`,
       orderData
     );
 

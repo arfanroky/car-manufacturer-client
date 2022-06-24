@@ -66,7 +66,6 @@ function App() {
           <Route path="my-orders" element={<MyOrder/>}/>
           <Route path="add-review" element={<AddReview/>}/>
           <Route path="payment/:id" element={<Payment/>}></Route>
-
           <Route path="manage-orders" element={<RequireAdmin>
             <ManageOrders/>
           </RequireAdmin>}/>

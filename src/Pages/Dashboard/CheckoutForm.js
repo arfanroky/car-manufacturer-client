@@ -1,5 +1,9 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import axiosPrivate from '../../api/axiosPrivate';
+import Spinner from '../../Shared/Spinner';
+import { toast } from 'react-toastify';
 
 const CheckoutForm = ({ order }) => {
   const stripe = useStripe();
@@ -12,25 +16,18 @@ const CheckoutForm = ({ order }) => {
 
   const { _id, price, name, email } = order;
 
-  useEffect(() => {
-    fetch(
-      'https://sleepy-anchorage-47167.herokuapp.com/create-payment-intent',
-      {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        body: JSON.stringify({ price }),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.clientSecret) {
-          setClientSecret(data?.clientSecret);
-        }
+  const orderData = async () => {
+    await axios
+      .post(
+        'https://sleepy-anchorage-47167.herokuapp.com/create-payment-intent',
+        { price }
+      )
+      .then((res) => {
+        setClientSecret(res.data.clientSecret);
       });
-  }, [price]);
+  };
+
+  orderData();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -66,13 +63,11 @@ const CheckoutForm = ({ order }) => {
       });
 
     if (intentError) {
-      console.log(intentError);
       setCardError(intentError?.message);
       setProcessing(false);
     } else {
       setCardError('');
       setTransactionId(paymentIntent.id);
-      console.log(paymentIntent);
       setSuccess('Your payment is done');
 
       const payment = {
@@ -80,20 +75,22 @@ const CheckoutForm = ({ order }) => {
         transactionId: paymentIntent.id,
       };
 
-      fetch(`https://sleepy-anchorage-47167.herokuapp.com/order/${_id}`, {
-        method: 'PATCH',
-        headers: {
-          'content-type': 'application/json',
-          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        body: JSON.stringify(payment),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
+      console.log('payment', payment);
+
+      const { data } = await axios.patch(
+        `https://sleepy-anchorage-47167.herokuapp.com/order/${_id}`,
+        payment
+      );
+      console.log('success', data);
+      if (data.success) {
+        toast.success('successfully paid');
+      }
     }
   };
+
+  // if (processing) {
+  //   return <Spinner />;
+  // }
 
   return (
     <>
@@ -114,13 +111,15 @@ const CheckoutForm = ({ order }) => {
             },
           }}
         />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          disabled={!stripe || !clientSecret}
-        >
-          Pay
-        </button>
+        <div className="text-right mt-6">
+          <button
+            className="btn btn-sm px-8 btn-primary text-white  capitalize"
+            type="submit"
+            disabled={!stripe || !clientSecret}
+          >
+            Pay
+          </button>
+        </div>
       </form>
       {cardError && <p className="text-error">{cardError}</p>}
       {success && (

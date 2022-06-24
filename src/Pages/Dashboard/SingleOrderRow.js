@@ -1,11 +1,8 @@
 import {
-  faMoneyCheckDollar,
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axiosPrivate from '../../api/axiosPrivate';
 
 const SingleOrderRow = ({ order, index, setConfirmDelete }) => {
   const { paid, _id, name, email, productName, img, price } = order;
@@ -54,7 +51,7 @@ const SingleOrderRow = ({ order, index, setConfirmDelete }) => {
               <button className="btn btn-warning mr-3">Unpaid</button>
               <label
                 onClick={() => setConfirmDelete(order)}
-                htmlFor="delete-dialog"
+                htmlFor="handleCancel"
                 className="btn btn-primary"
               >
                 Delete

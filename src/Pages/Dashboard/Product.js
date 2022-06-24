@@ -35,7 +35,7 @@ const Product = ({product, setConfirmDelete}) => {
           <div className="card-actions justify-end ">
           <label
                 onClick={() => setConfirmDelete(product)}
-                htmlFor="delete-dialog"
+                htmlFor="handleProductDelete"
                 className="btn btn-outline btn-error"
               >
                Delete <FontAwesomeIcon className='w-6 ml-3' icon={faTrash}/>

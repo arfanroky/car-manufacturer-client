@@ -1,8 +1,10 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Spinner from '../../Shared/Spinner';
 import CheckoutForm from './CheckoutForm';
 
@@ -12,26 +14,37 @@ const stripePromise = loadStripe(
 
 const Payment = () => {
   const { id } = useParams();
-  const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`;
-
-  const { data: order, isLoading } = useQuery(['order', id], () =>
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    }).then((res) => res.json())
+  const [order, setOrder] = useState();
+  const { isLoading, error } = useQuery(
+    ['order', id],
+    async () =>
+      await axios
+        .get(
+          `https://sleepy-anchorage-47167.herokuapp.com/order/payment?id=${id}`
+        )
+        .then((res) => {
+          console.log(res);
+          setOrder(res.data.result);
+        })
+        .catch((error) => {
+          console.dir(error);
+          toast.error(error);
+        })
   );
-
-  //   console.log(order);
 
   if (isLoading) {
     return <Spinner></Spinner>;
   }
+  if (error) {
+    // alert('order can not get',error)
+  }
+  // console.log('payment page',order);
 
   return (
     <div className="min-h-screen py-12 ">
-      <h1 className="text-6xl uppercase text-primary font-thin">Payment</h1>
+      <h1 className="text-6xl uppercase text-primary font-thin text-center my-12">
+        Payment
+      </h1>
       <div className="card w-50  max-w-md bg-base-100 shadow-xl border border-primary mx-auto">
         <div className="card-body">
           <h2 className="card-title">

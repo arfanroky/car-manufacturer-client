@@ -23,15 +23,12 @@ const ManageOrders = () => {
     const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${id}`;
     await axios.delete(url).then((res) => {
       const { data } = res;
-      console.log(data);
       if (data.result.deletedCount) {
         toast.success('Delete Successfully');
         setConfirmDelete(null);
       }
     });
   };
-
-  console.log('sd;lfjkdsfl;',confirmDelete);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import axiosPrivate from '../../api/axiosPrivate';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -34,7 +34,6 @@ const MyProfile = () => {
       age: e.age,
       phone: e.phone,
     };
-    console.log(profileUpdate);
 
     const { data } = await axiosPrivate.patch(
       `https://sleepy-anchorage-47167.herokuapp.com/profileUpdate/${user?.email}`,
