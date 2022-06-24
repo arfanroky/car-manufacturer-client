@@ -2,7 +2,7 @@
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Machinery from './Pages/HomePage/Machinery';
-import Reviews from './Pages/HomePage/Reviews';
+// import Reviews from './Pages/HomePage/Reviews';
 import { RequireAuth } from "./Authentication/RequireAuth";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import SignUp from "./Pages/LoginPage/SignUp";
@@ -38,7 +38,7 @@ function App() {
         <Route path="/" element={<Home></Home>} />
         <Route path="/home" element={<Home />} />
         <Route path="/machinery" element={<Machinery />} />
-        <Route path="/reviews" element={<Reviews />} />
+        {/* <Route path="/reviews" element={<Reviews />} /> */}
         <Route path="/portfolio" element={<MyPortfolio />} />
       
         <Route path="/my-profile" element={<MyProfile/>}/>

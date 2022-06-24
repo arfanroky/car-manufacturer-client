@@ -10,8 +10,7 @@ const Items = (props) => {
   const desc = description.slice(0, 150);
 
   return (
-    <div className="col">
-      <div className="card card-compact md:w-96 bg-base-100 shadow-xl border border-primary ">
+    <div className="card card-compact w-96 bg-base-100 shadow-xl border border-primary ">
         <figure>
           <img src={img} alt="equipment" />
         </figure>
@@ -39,7 +38,6 @@ const Items = (props) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
