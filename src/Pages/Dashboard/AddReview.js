@@ -21,15 +21,17 @@ const AddReview = () => {
 
   const reviewId = id.id;
   const { data, isLoading, error } = useQuery(['equipment', id], () =>
-    axios.get(`http://localhost:5000/equipment/${reviewId}`)
+    axios.get(
+      `https://sleepy-anchorage-47167.herokuapp.com/equipment/${reviewId}`
+    )
   );
 
   if (loading | isLoading) {
     return <Spinner></Spinner>;
   }
 
-  if(error){
-    toast.error(error)
+  if (error) {
+    toast.error(error);
   }
 
   const onSubmit = async (e) => {
@@ -38,20 +40,27 @@ const AddReview = () => {
       userImg: user.reloadUserInfo.photoUrl,
       productName: e.productName,
       rating: e.rating,
-      description: e.description
-    }
+      description: e.description,
+    };
 
-     await axios.put(`http://localhost:5000/equipment/${reviewId}`, {review}).catch(err => {
-      toast.error(err)
-     })
+    await axios
+      .put(
+        `https://sleepy-anchorage-47167.herokuapp.com/equipment/${reviewId}`,
+        { review }
+      )
+      .catch((err) => {
+        toast.error(err);
+      });
 
-    const {data} =  await axios.put(`http://localhost:5000/userReview/${reviewId}`, {review})
-   
+    const { data } = await axios.put(
+      `https://sleepy-anchorage-47167.herokuapp.com/userReview/${reviewId}`,
+      { review }
+    );
+
     console.log(data);
-    if(data.result.acknowledged){
-      toast.success(data.success)
+    if (data.result.acknowledged) {
+      toast.success(data.success);
     }
-
   };
 
   return (
