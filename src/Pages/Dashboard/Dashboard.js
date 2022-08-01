@@ -23,14 +23,14 @@ const Dashboard = () => {
         <label htmlFor="dashboard-side-nav" className="drawer-overlay" />
         <ul className="menu p-4 overflow-y-auto w-30 bg-base-100 text-base-content">
           <li>
-            <NavLink to="/dashboard">My Profile</NavLink>
+            <NavLink className='mb-3' to="/dashboard">My Profile</NavLink>
           </li>
 
               <li>
                {
                  (admin === false) && <>
-                  <NavLink to="/dashboard/my-orders">My Orders</NavLink>
-                <NavLink to="/dashboard/add-review">Add A Review</NavLink>
+                  <NavLink className='mb-3' to="/dashboard/my-orders">My Orders</NavLink>
+                <NavLink className='mb-3' to="/dashboard/add-review">Add A Review</NavLink>
                  </>
                }
               </li>
@@ -38,12 +38,12 @@ const Dashboard = () => {
             <li>
               {
                 (admin === true) &&  <>
-              <NavLink to="/dashboard/manage-orders">
+              <NavLink className='mb-3' to="/dashboard/manage-orders">
                 Manage All Orders
               </NavLink>
-              <NavLink to="/dashboard/add-product">Add A Product</NavLink>
-              <NavLink to="/dashboard/make-admin">Make Admin</NavLink>
-              <NavLink to="/dashboard/manage-products">
+              <NavLink className='mb-3' to="/dashboard/add-product">Add A Product</NavLink>
+              <NavLink className='mb-3' to="/dashboard/make-admin">Make Admin</NavLink>
+              <NavLink className='mb-3' to="/dashboard/manage-products">
                 Manage Products
               </NavLink>
               </>

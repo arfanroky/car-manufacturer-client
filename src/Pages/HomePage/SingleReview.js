@@ -1,30 +1,28 @@
+import { Rating } from '@mui/material';
+import React from 'react';
 
-// import React from 'react';
-// import Ratings from './Ratings';
+const SingleReview = ({ review }) => {
+  console.log(review);
+  const { userImg, userName, description, rating } = review;
+  console.log(rating);
+  return (
+    <div className="md:w-[350px] shadow-lg p-4 border rounded-md hover:translate-x-2 transition-all">
+      <figure className="w-24 border h-24 rounded-full mx-auto">
+        <img
+          className="w-full h-full rounded-full border-2 border-primary"
+          src={userImg}
+          alt=""
+        />
+      </figure>
+      <div>
+        <h1 className="text-center font-bold text-xl">{userName}</h1>
+        <p className="text-center">
+          <Rating name="half-rating-read" value={Number(rating)} readOnly />
+        </p>
+        <p className="text-justify">{description}</p>
+      </div>
+    </div>
+  );
+};
 
-// const SingleReview = ({ review }) => {
-//   const { rating, description, userImg, userName } = review;
-//   return (
-//     <div className="card lg:w-96 bg-base-100 shadow-xl border border-primary">
-//       <div className="card-body p-6 ">
-//      <div className="flex justify-between">
-//     <div className='flex gap-x-2'>
-//     <div className="avatar ">
-//           <div className=" w-12 rounded ring-offset-2">
-//             <img src={userImg} alt="userImg" />
-//           </div>
-//         </div>
-//        <div>
-//        <p className=" uppercase font-bold text-primary">{userName}</p>
-//         <small className='text-secondary'>Jessore</small>
-//        </div>
-//     </div>
-//         <Ratings rating={rating} />
-//      </div>
-//         <p>{description}</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SingleReview;
+export default SingleReview;

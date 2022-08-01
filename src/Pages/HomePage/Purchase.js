@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 const Purchase = () => {
   const {
@@ -18,6 +19,7 @@ const Purchase = () => {
   const [user, loading] = useAuthState(auth);
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [minQuantity, setMinQuantity] = useState();
 
   const { isLoading, error } = useQuery(['equipment', id], () =>
     fetch(`https://sleepy-anchorage-47167.herokuapp.com/equipment/${id}`)
@@ -27,6 +29,7 @@ const Purchase = () => {
       })
   );
 
+
   if (isLoading || loading) {
     return <Spinner></Spinner>;
   }
@@ -34,6 +37,8 @@ const Purchase = () => {
   if (error) {
     toast.error(error);
   }
+
+
 
   const onSubmit = async (e) => {
     let prevPrice = parseInt(product.price);
@@ -43,7 +48,9 @@ const Purchase = () => {
     const avQuantity =
       parseInt(product.available_quantity) - parseInt(e.quantity);
 
+  
     const orderData = {
+      product:product,
       img: product.img,
       name: e.userName,
       email: e.email,
@@ -55,7 +62,7 @@ const Purchase = () => {
 
     await axios.put(
       `https://sleepy-anchorage-47167.herokuapp.com/equipment/${id}`,
-      { avQuantity }
+      { avQuantity, minQuantity }
     );
 
     const { data } = await axios.put(
@@ -157,15 +164,15 @@ const Purchase = () => {
                   message: 'Quantity is Required',
                 },
                 min: {
-                  value: product.quantity,
-                  message: `You have to Order more than ${product.quantity}`,
+                  value: `${product.quantity > product.available_quantity ? product.available_quantity: product.quantity}`,
+                  message: `You have to Order more than ${product.quantity > product.available_quantity ? product.available_quantity: product.quantity}`,
                 },
                 max: {
                   value: product.available_quantity,
                   message: `You should order under the maximum ${product.available_quantity}`,
                 },
               })}
-              defaultValue={product.quantity}
+              defaultValue={product.quantity > product.available_quantity ? product.available_quantity: product.quantity}
             />
             {errors.quantity?.type === 'required' && (
               <span className="label-text-alt text-red-500">

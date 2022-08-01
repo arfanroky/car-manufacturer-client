@@ -18,14 +18,13 @@ const Nav = () => {
   }
 
 
-  const navmenu = <>
+  const navMenu = <>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/portfolio'>My Portfolio</Link></li>
     {
         user && <li><Link to='/dashboard'>Dashboard</Link></li>
     }
      <li><Link to='/blog'>Blog</Link></li>
-
     <li>{user ? (
               <button onClick={logout} className="btn btn-outline btn-error">
                 Sign Out <FontAwesomeIcon icon={faArrowRightFromBracket} />
@@ -58,7 +57,7 @@ const Nav = () => {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
           </label>
           <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 shadow-2xl bg-accent text-white  rounded-box w-52">
-          {navmenu}
+          {navMenu}
           </ul>
         </div>
         <Link className="text-xl uppercase font-bold" to="/">
@@ -67,7 +66,7 @@ const Nav = () => {
       </div>
       <div className=" navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal p-0 ">
-          {navmenu}
+          {navMenu}
         </ul>
       </div>
       

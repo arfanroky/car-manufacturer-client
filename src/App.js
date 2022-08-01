@@ -38,7 +38,6 @@ function App() {
         <Route path="/" element={<Home></Home>} />
         <Route path="/home" element={<Home />} />
         <Route path="/machinery" element={<Machinery />} />
-        {/* <Route path="/reviews" element={<Reviews />} /> */}
         <Route path="/portfolio" element={<MyPortfolio />} />
       
         <Route path="/my-profile" element={<MyProfile/>}/>
@@ -64,7 +63,7 @@ function App() {
         >
           <Route index element={<MyProfile/>}></Route>
           <Route path="my-orders" element={<MyOrder/>}/>
-          <Route path="add-review" element={<AddReview/>}/>
+          <Route path="add-review/:id" element={<AddReview/>}/>
           <Route path="payment/:id" element={<Payment/>}></Route>
           <Route path="manage-orders" element={<RequireAdmin>
             <ManageOrders/>

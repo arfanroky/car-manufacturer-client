@@ -6,8 +6,8 @@ import banner2 from '../../images/banner-2.webp';
 const Carousel = () => {
   return (
     
-    <>
-    <div className="carousel w-full">
+    <div className='container mx-auto px-6'>
+    <div className="carousel w-full ">
 
       <div id="slide1" className="carousel-item relative w-full">
         <img src={banner1} className="sm:w-full md:h-[547px] h-[250px] overflow-hidden" alt="banner-1" />
@@ -55,7 +55,7 @@ const Carousel = () => {
       </div>
 
     </div>
-    </>
+    </div>
   );
 };
 

@@ -14,7 +14,9 @@ import CountUp from 'react-countup';
 
 const BusinessSummary = () => {
   return (
-    <div className=" shadow-2xl rounded-lg my-12 py-6 bg-accent">
+    <div className='container mx-auto px-6 '>
+
+    <div className="shadow-2xl rounded-lg my-12 py-6 bg-accent">
      <div className='text-center'>
      <h1 className='md:text-5xl text-2xl text-center font-bold capitalize text-primary'>millions business trust us</h1>
       <h3 className='md:text-3xl text-lg text-center font-bold uppercase text-white mb-6'>try to understand users expectation</h3>
@@ -52,6 +54,7 @@ const BusinessSummary = () => {
               <button className='btn btn-secondary block'>Contact Us</button>
           </div>
       </div>
+    </div>
     </div>
   );
 };

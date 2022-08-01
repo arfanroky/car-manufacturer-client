@@ -4,8 +4,10 @@ import bannerImg from '../../images/banner-2.webp';
 
 const DiscountPage = () => {
   return (
-    <div
-      className="hero min-h-screen bg-fixed mt-12"
+
+  <div className='container mx-auto px-6'>
+      <div
+      className=" hero min-h-screen bg-fixed mt-12 rounded"
       style={{ backgroundImage: `url('${bannerImg}')`, height: '800px' }}
     >
       <div className="hero-overlay bg-opacity-60"></div>
@@ -26,6 +28,7 @@ const DiscountPage = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

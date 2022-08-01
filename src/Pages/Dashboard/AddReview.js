@@ -1,13 +1,16 @@
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import axiosPrivate from '../../api/axiosPrivate';
 import Spinner from '../../Shared/Spinner';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import './Review.css';
 
 const AddReview = () => {
+  const id = useParams();
   const {
     register,
     formState: { errors },
@@ -16,77 +19,107 @@ const AddReview = () => {
 
   const [user, loading] = useAuthState(auth);
 
-  if (loading) {
+  const reviewId = id.id;
+  const { data, isLoading, error } = useQuery(['equipment', id], () =>
+    axios.get(`http://localhost:5000/equipment/${reviewId}`)
+  );
+
+  if (loading | isLoading) {
     return <Spinner></Spinner>;
+  }
+
+  if(error){
+    toast.error(error)
   }
 
   const onSubmit = async (e) => {
     const review = {
-      rating: e.ratings,
-      description: e.message,
-      userImg: user?.reloadUserInfo.photoUrl,
-      userName: user?.reloadUserInfo.displayName,
-    };
-
-    const { data } = await axiosPrivate.post(
-      'https://sleepy-anchorage-47167.herokuapp.com/allReviews',
-      review
-    );
-
-    if (data) {
-      toast.success(
-        'you have added a review.. go to home page and see your review'
-      );
+      userName: user.reloadUserInfo.displayName,
+      userImg: user.reloadUserInfo.photoUrl,
+      productName: e.productName,
+      rating: e.rating,
+      description: e.description
     }
+
+     await axios.put(`http://localhost:5000/equipment/${reviewId}`, {review}).catch(err => {
+      toast.error(err)
+     })
+
+    const {data} =  await axios.put(`http://localhost:5000/userReview/${reviewId}`, {review})
+   
+    console.log(data);
+    if(data.result.acknowledged){
+      toast.success(data.success)
+    }
+
   };
 
   return (
     <div className="container mx-auto">
-      <h1>Add A Review</h1>
-
+      <h1 className="text-center my-8 font-bold capitalize md:text-4xl text-2xl">
+        write a <span className="text-warning">review</span>
+      </h1>
       <form
-        className="w-[300px] mx-auto p-5 border border-warning"
+        className="md:w-[500px] mx-auto p-5 border border-warning"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="w-full mb-3">
-          <label
-            className="block uppercase text-md font-bold text-left"
-            htmlFor="name"
-          >
-            Ratings
-          </label>
+        <div className="flex justify-between">
+          <div>
+            <label
+              className="block uppercase text-md font-bold text-left"
+              htmlFor="name"
+            >
+              Product Name
+            </label>
+            <input
+              className="w-full py-3 pl-2 outline-none border text-lg border-warning rounded"
+              type="text"
+              {...register('productName')}
+              value={data.data.name}
+              readOnly
+            />
+          </div>
 
-          <input
-            className="w-full py-3 pl-2 outline-none border text-lg border-warning rounded"
-            placeholder="Type Ratings"
-            type="number"
-            {...register('ratings', {
-              required: {
-                value: true,
-                message: 'Please give a single rating',
-              },
-              min: {
-                value: 1,
-                message: 'Enter valid number',
-              },
-              max: {
-                value: 5,
-                message: `you can give ratings less than 5 or equal`,
-              },
-            })}
-          />
-          {errors.ratings?.type === 'required' && (
-            <p className="text-error mt-1">{errors.ratings.message}</p>
-          )}
-          {errors.ratings?.type === 'min' && (
-            <p className="text-error mt-1">{errors.ratings.message}</p>
-          )}
-          {errors.ratings?.type === 'max' && (
-            <p className="text-error m-1">{errors.ratings.message}</p>
-          )}
+          <div>
+            <label
+              className="block uppercase text-md font-bold text-left"
+              htmlFor="name"
+            >
+              Ratings
+            </label>
+
+            <input
+              className="w-full py-3 pl-2 outline-none border text-lg border-warning rounded"
+              placeholder="Ratings"
+              type="number"
+              {...register('rating', {
+                required: {
+                  value: true,
+                  message: 'Rating should contain',
+                },
+                min: {
+                  value: 1,
+                  message: 'Give a rating more than 0',
+                },
+                max: {
+                  value: 5,
+                  message: `Give a rating of 5 or equal`,
+                },
+              })}
+            />
+            {errors.rating?.type === 'required' && (
+              <p className="text-error mt-1">{errors.rating.message}</p>
+            )}
+            {errors.rating?.type === 'min' && (
+              <p className="text-error mt-1">{errors.rating.message}</p>
+            )}
+            {errors.rating?.type === 'max' && (
+              <p className="text-error m-1">{errors.rating.message}</p>
+            )}
+          </div>
         </div>
 
-        <div className="w-full mb-3">
+        <div className="w-full my-3">
           <label
             className="block uppercase text-md font-bold text-left"
             htmlFor="name"
@@ -95,18 +128,19 @@ const AddReview = () => {
           </label>
 
           <input
-            className="w-full py-6 pl-2 outline-none border text-lg border-warning rounded"
-            placeholder="Type message"
+            className="w-full pt-2 pl-2 pb-24 outline-none border text-lg border-warning rounded"
+            placeholder="Description"
             type="text"
-            {...register('message', {
+            {...register('description', {
               required: {
                 value: true,
-                message: 'Please give a single rating',
+                message: `Write something about ${data.data.name}`,
               },
             })}
           />
-          {errors.message?.type === 'required' && (
-            <p className="text-error mt-1">{errors.ratings.message}</p>
+
+          {errors.description?.type === 'required' && (
+            <p className="text-error mt-1">{errors.description.message}</p>
           )}
         </div>
 
@@ -116,8 +150,6 @@ const AddReview = () => {
           value="Login"
         />
       </form>
-
-      <textarea name="" id="" cols="30" rows="10"></textarea>
     </div>
   );
 };

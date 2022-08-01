@@ -37,8 +37,6 @@ const MyOrder = () => {
         })
   );
 
-  // console.log(orderItem);
-
   if (isLoading || loading) {
     return <Spinner></Spinner>;
   }
@@ -59,6 +57,7 @@ const MyOrder = () => {
   return (
     <>
       <div className=" h-screen">
+        <h1 className='text-center my-8 font-bold capitalize md:text-4xl text-2xl'>You have <span className='text-primary'>ordered</span> {orders.length} Equipments</h1>
         <div className="overflow-x-auto">
           <table className="table w-full">
             {/* head */}
