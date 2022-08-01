@@ -30,7 +30,6 @@ const Dashboard = () => {
                {
                  (admin === false) && <>
                   <NavLink className='mb-3' to="/dashboard/my-orders">My Orders</NavLink>
-                <NavLink className='mb-3' to="/dashboard/add-review">Add A Review</NavLink>
                  </>
                }
               </li>

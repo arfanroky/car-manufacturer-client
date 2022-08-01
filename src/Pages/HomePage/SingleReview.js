@@ -2,9 +2,9 @@ import { Rating } from '@mui/material';
 import React from 'react';
 
 const SingleReview = ({ review }) => {
-  console.log(review);
+
   const { userImg, userName, description, rating } = review;
-  console.log(rating);
+
   return (
     <div className="md:w-[350px] shadow-lg p-4 border rounded-md hover:translate-x-2 transition-all">
       <figure className="w-24 border h-24 rounded-full mx-auto">

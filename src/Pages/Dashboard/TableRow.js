@@ -4,12 +4,15 @@ import {
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const TableRow = ({ order, index, handleCancel, setConfirmDelete }) => {
-  // console.log(order);
   const { paid, _id, name, email, productName, img, price } = order;
+
+  console.log(order);
+
+  // console.log(paid);
 
   return (
     <>

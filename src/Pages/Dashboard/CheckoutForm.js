@@ -88,10 +88,6 @@ const CheckoutForm = ({ order }) => {
     }
   };
 
-  // if (processing) {
-  //   return <Spinner />;
-  // }
-
   return (
     <>
       <form onSubmit={handleSubmit}>

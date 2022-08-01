@@ -18,7 +18,6 @@ const MyOrder = () => {
   const [orders, setOrders] = useState([]);
 
   const url = `https://sleepy-anchorage-47167.herokuapp.com/order/${user?.email}`;
-  console.log(user?.email);
 
   const { isLoading } = useQuery(
     'orderItem',

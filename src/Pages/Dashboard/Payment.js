@@ -36,9 +36,10 @@ const Payment = () => {
     return <Spinner></Spinner>;
   }
   if (error) {
-    // alert('order can not get',error)
+    
+    toast.error(error)
   }
-  // console.log('payment page',order);
+
 
   return (
     <div className="min-h-screen py-12 ">
