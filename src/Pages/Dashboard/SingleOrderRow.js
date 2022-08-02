@@ -2,22 +2,10 @@ import {
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const SingleOrderRow = ({ order, index, setConfirmDelete }) => {
   const { paid, _id, name, email, productName, img, price } = order;
-  const [paidBtn, setPaidBtn] = useState('Pending');
-  useEffect(() => {
-    if (paid) {
-      setPaidBtn('Pending');
-    } else if (!paid) {
-      setPaidBtn('Unpaid');
-    }
-  }, [paid]);
-
-  const handlePaidBtn = () => {
-    setPaidBtn('Shipped');
-  };
 
   return (
     <>
@@ -41,23 +29,31 @@ const SingleOrderRow = ({ order, index, setConfirmDelete }) => {
         </td>
         <td>{price}</td>
         <td className="w-full flex justify-center">
-          {paid ? (
-            <button onClick={handlePaidBtn} className="btn btn-info">
-              {paidBtn}
-              <FontAwesomeIcon className="ml-4 text-xl" icon={faSpinner} />
-            </button>
-          ) : (
-            <>
-              <button className="btn btn-warning mr-3">Unpaid</button>
+            {
+              paid === 'Pending' ? <><button className='btn btn-info'>
+                {paid} <FontAwesomeIcon className='ml-2' icon={faSpinner}/>
+              </button></>: ''
+            }
+            {
+              paid === 'Shipped' ? <button className='btn btn-success'>
+                {paid}
+              </button> : ''
+            }
+            {
+              paid === 'Unpaid' ? <>
+              <button className='btn bg-red-600 mr-2'>
+                {paid}
+              </button>
               <label
                 onClick={() => setConfirmDelete(order)}
                 htmlFor="handleCancel"
                 className="btn btn-primary"
               >
                 Delete
-              </label>
-            </>
-          )}
+                </label>
+              </> : ''
+            }
+           
         </td>
       </tr>
     </>

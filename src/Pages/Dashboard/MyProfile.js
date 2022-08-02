@@ -7,6 +7,8 @@ import Spinner from '../../Shared/Spinner';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const MyProfile = () => {
   const { register, handleSubmit } = useForm();
@@ -57,7 +59,11 @@ const MyProfile = () => {
             {/* user img */}
             <div className="avatar pl-4">
               <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src={userImg} className="text-center" alt="userImg" />
+                {userImg ? (
+                  <img src={userImg} className="text-center" alt="userImg" />
+                ) : (
+                  <FontAwesomeIcon className="text-5xl mt-5" icon={faUser} />
+                )}
               </div>
             </div>
 

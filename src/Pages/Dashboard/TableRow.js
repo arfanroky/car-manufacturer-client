@@ -10,8 +10,6 @@ import { Link } from 'react-router-dom';
 const TableRow = ({ order, index, handleCancel, setConfirmDelete }) => {
   const { paid, _id, name, email, productName, img, price } = order;
 
-  console.log(order);
-
   // console.log(paid);
 
   return (

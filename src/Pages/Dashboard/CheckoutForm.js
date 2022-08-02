@@ -75,13 +75,11 @@ const CheckoutForm = ({ order }) => {
         transactionId: paymentIntent.id,
       };
 
-      console.log('payment', payment);
-
       const { data } = await axios.patch(
         `https://sleepy-anchorage-47167.herokuapp.com/order/${_id}`,
         payment
       );
-      console.log('success', data);
+
       if (data.success) {
         toast.success('successfully paid');
       }

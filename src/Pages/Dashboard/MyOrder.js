@@ -56,7 +56,10 @@ const MyOrder = () => {
   return (
     <>
       <div className="container mx-auto h-screen">
-        <h1 className='text-center my-12 font-semibold capitalize md:text-4xl text-2xl'>You have <span className='text-primary'>ordered</span> {orders.length} Equipments</h1>
+        <h1 className="text-center my-12 font-semibold capitalize md:text-4xl text-2xl">
+          You have <span className="text-primary">ordered</span> {orders.length}{' '}
+          Equipments
+        </h1>
         <div className="overflow-x-auto">
           <table className="table w-full">
             {/* head */}

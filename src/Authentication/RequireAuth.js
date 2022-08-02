@@ -6,11 +6,11 @@ import Spinner from '../Shared/Spinner';
 import { toast } from 'react-toastify';
 
 const RequireAuth = ({ children }) => {
-  const [user, loading] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
   let location = useLocation();
-  const [sendEmailVerification, sending, error] = useSendEmailVerification(auth)
+  // const [sendEmailVerification, sending, error] = useSendEmailVerification(auth)
 
-  if(loading || sending){
+  if(loading){
       return <Spinner></Spinner>
   }
 
@@ -25,21 +25,21 @@ const RequireAuth = ({ children }) => {
     // than dropping them off on the home page.
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-    if (user.providerData[0]?.providerId ==='password' && !user.emailVerified) {
-        return <div className='text-center mt-5'>
-            <h3 className='text-error'>Your Email is not verified!!</h3>
-            <h5 className='text-success'> Please Verify your email address</h5>
-            <button
-            className='btn btn-primary'
-                onClick={async () => {
-                    await sendEmailVerification();
-                    toast.success('Verification Email Sent!');
-                }}
-            >
-                Send Verification Email Again
-            </button>
-        </div>
-        }
+    // if (user.providerData[0]?.providerId ==='password' && !user.emailVerified) {
+    //     return <div className='text-center mt-5'>
+    //         <h3 className='text-error'>Your Email is not verified!!</h3>
+    //         <h5 className='text-success'> Please Verify your email address</h5>
+    //         <button
+    //         className='btn btn-primary'
+    //             onClick={async () => {
+    //                 await sendEmailVerification();
+    //                 toast.success('Verification Email Sent!');
+    //             }}
+    //         >
+    //             Send Verification Email Again
+    //         </button>
+    //     </div>
+    //     }
 
   return children;
 };

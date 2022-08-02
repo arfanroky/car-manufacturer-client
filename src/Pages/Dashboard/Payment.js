@@ -23,11 +23,9 @@ const Payment = () => {
           `https://sleepy-anchorage-47167.herokuapp.com/order/payment?id=${id}`
         )
         .then((res) => {
-          console.log(res);
           setOrder(res.data.result);
         })
         .catch((error) => {
-          console.dir(error);
           toast.error(error);
         })
   );
@@ -36,10 +34,8 @@ const Payment = () => {
     return <Spinner></Spinner>;
   }
   if (error) {
-    
-    toast.error(error)
+    toast.error(error);
   }
-
 
   return (
     <div className="min-h-screen py-12 ">

@@ -29,6 +29,7 @@ const Purchase = () => {
       })
   );
 
+  console.log(product.name);
 
   if (isLoading || loading) {
     return <Spinner></Spinner>;
@@ -38,8 +39,6 @@ const Purchase = () => {
     toast.error(error);
   }
 
-
-
   const onSubmit = async (e) => {
     let prevPrice = parseInt(product.price);
     const getPrice = prevPrice * parseInt(e.quantity);
@@ -48,21 +47,23 @@ const Purchase = () => {
     const avQuantity =
       parseInt(product.available_quantity) - parseInt(e.quantity);
 
-  
     const orderData = {
-      product:product,
       img: product.img,
       name: e.userName,
       email: e.email,
-      productName: e.productName,
+      productName: product.name,
       quantity: e.quantity,
       price: prevPrice,
       location: e.location,
+      paid: 'Unpaid',
     };
 
     await axios.put(
       `https://sleepy-anchorage-47167.herokuapp.com/equipment/${id}`,
-      { avQuantity, minQuantity }
+      {
+        avQuantity,
+        minQuantity,
+      }
     );
 
     const { data } = await axios.put(
@@ -146,7 +147,7 @@ const Purchase = () => {
               className="w-full py-3 pl-2 outline-none text-lg shadow-lg rounded"
               type="text"
               {...register('productName')}
-              value={product.name}
+              value={product?.productName}
               readOnly
             />
           </div>
@@ -164,15 +165,27 @@ const Purchase = () => {
                   message: 'Quantity is Required',
                 },
                 min: {
-                  value: `${product.quantity > product.available_quantity ? product.available_quantity: product.quantity}`,
-                  message: `You have to Order more than ${product.quantity > product.available_quantity ? product.available_quantity: product.quantity}`,
+                  value: `${
+                    product.quantity > product.available_quantity
+                      ? product.available_quantity
+                      : product.quantity
+                  }`,
+                  message: `You have to Order more than ${
+                    product.quantity > product.available_quantity
+                      ? product.available_quantity
+                      : product.quantity
+                  }`,
                 },
                 max: {
                   value: product.available_quantity,
                   message: `You should order under the maximum ${product.available_quantity}`,
                 },
               })}
-              defaultValue={product.quantity > product.available_quantity ? product.available_quantity: product.quantity}
+              defaultValue={
+                product.quantity > product.available_quantity
+                  ? product.available_quantity
+                  : product.quantity
+              }
             />
             {errors.quantity?.type === 'required' && (
               <span className="label-text-alt text-red-500">
@@ -201,7 +214,7 @@ const Purchase = () => {
               Location
             </label>
             <select
-              class=" w-full py-3 pl-2 outline-none text-lg shadow-lg rounded"
+              className=" w-full py-3 pl-2 outline-none text-lg shadow-lg rounded"
               {...register('location')}
             >
               <option>Bangladesh</option>

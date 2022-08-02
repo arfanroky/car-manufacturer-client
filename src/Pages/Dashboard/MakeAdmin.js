@@ -6,6 +6,7 @@ import Spinner from '../../Shared/Spinner';
 import AdminRow from './AdminRow';
 
 const MakeAdmin = () => {
+  const [query, setQuery] = useState('');
   const { data, isLoading, error, refetch } = useQuery('users', () =>
     axiosPrivate.get('https://sleepy-anchorage-47167.herokuapp.com/user')
   );
@@ -22,9 +23,17 @@ const MakeAdmin = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-center md:text-5xl text-2xl font-semibold text-primary my-12">
-        Make Admin
+      <h1 className="text-center md:text-4xl text-2xl font-semibold my-12">
+        Make <span className="text-primary">Admin</span>
       </h1>
+      <div className="flex justify-end mb-6 mr-6">
+        <input
+          onChange={(e) => setQuery(e.target.value)}
+          type="text"
+          placeholder="Search by email"
+          className="input input-bordered input-primary w-full max-w-xs"
+        />
+      </div>
       <div className="overflow-x-auto mx-6 ">
         <table className="table w-full">
           <thead>
@@ -36,14 +45,16 @@ const MakeAdmin = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.data.map((user, index) => (
-              <AdminRow
-                index={index}
-                key={user._id}
-                user={user}
-                refetch={refetch}
-              />
-            ))}
+            {data?.data
+              .filter((user) => user.email.includes(query))
+              .map((user, index) => (
+                <AdminRow
+                  index={index}
+                  key={user._id}
+                  user={user}
+                  refetch={refetch}
+                />
+              ))}
           </tbody>
         </table>
       </div>
