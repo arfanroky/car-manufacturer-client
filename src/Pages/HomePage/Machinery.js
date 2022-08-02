@@ -11,8 +11,8 @@ const Machinery = () => {
   }
   
   return (
-    <div className="my-12 container mx-auto px-6">
-      <h1 className="text-center md:text-6xl font-thin text-primary text-3xl font-serif my-12">
+    <div className="container mx-auto px-6">
+      <h1 className="text-center md:text-5xl font-semibold text-primary text-2xl my-12">
         Equipments
       </h1>
       <div className="flex md:justify-between justify-center items-center gap-5 flex-wrap">

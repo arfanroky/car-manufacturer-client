@@ -14,10 +14,10 @@ const DiscountPage = () => {
       <div className="hero-content text-center text-neutral-content">
         <div className="max-w-md">
           <h1 className="mb-5 md:text-7xl text-5xl font-bold uppercase text-accent">
-            discount of 10%
+           off 10%
           </h1>
           <p className="mb-5 text-justify">
-            <span className="text-xl font-semibold text-white">Hi there, </span>
+            <span className="text-xl font-semibold text-white">Hi THERE, </span>
             <br />
             as soon as possible take your product which is you need for your car
             servicing .

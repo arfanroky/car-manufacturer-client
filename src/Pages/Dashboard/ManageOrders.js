@@ -33,7 +33,7 @@ const ManageOrders = () => {
   return (
     <>
       <div className="container mx-auto ">
-        <h1 className="text-center text-primary md:text-6xl text-2xl my-12 font-thin">
+        <h1 className="text-center text-primary md:text-5xl text-2xl my-12 font-semibold">
           Manage ALl Orders
         </h1>
 

@@ -18,8 +18,8 @@ const Reviews = () => {
   }
 
   return (
-    <div className="container mx-auto px-6 py-12">
-      <h1 className="text-center text-primary mb-8 text-5xl ">Reviews</h1>
+    <div className="container mx-auto px-6">
+      <h1 className="text-center text-primary my-12 font-semibold md:text-5xl text-2xl">Reviews</h1>
       <div className="grid md:grid-cols-3 grid-cols-1 gap-6">
         {data.data.map((review) => (
           <SingleReview key={review._id} review={review} />

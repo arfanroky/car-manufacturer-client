@@ -28,8 +28,8 @@ const ManageProducts = () => {
 
   return (
     <>
-      <div className="container mx-auto py-12 ">
-        <h1 className="text-center md:text-6xl font-thin text-primary text-3xl font-serif">
+      <div className="container mx-auto ">
+        <h1 className="text-center md:text-5xl my-12  font-semibold text-primary text-2xl ">
           Equipments
         </h1>
         <div className="grid md:grid-cols-2 grid-cols-1 justify-items-center gap-y-8 ">

@@ -22,7 +22,7 @@ const MakeAdmin = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-center md:text-5xl text-2xl font-thin text-primary my-12">
+      <h1 className="text-center md:text-5xl text-2xl font-semibold text-primary my-12">
         Make Admin
       </h1>
       <div className="overflow-x-auto mx-6 ">

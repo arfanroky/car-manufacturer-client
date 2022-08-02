@@ -10,8 +10,8 @@ const Gallery = () => {
   }
 
   return (
-    <div className="container mx-auto px-6 my-12 py-6">
-        <h1 className='text-6xl font-thin text-primary my-12 text-center'>Gallery</h1>
+    <div className="container mx-auto px-6 ">
+        <h1 className='md:text-5xl text-2xl font-semibold text-primary my-12 text-center'>Gallery</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 md:justify-between   gap-6">
         {products.slice(0, 6).map((product) => <div key={product._id} className={`border p-4 hover:bg-gradient-to-tr hover:from-primary hover:to-neutral transition rounded-lg`}>
                 <img className='w-full' src={product.img} alt="" />

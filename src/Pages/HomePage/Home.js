@@ -1,6 +1,7 @@
 import React from 'react';
 import BusinessSummary from './BusinessSummary';
 import Carousel from './Carousel';
+import Contact from './Contact';
 import DiscountPage from './DiscountPage';
 import Gallery from './Gallery';
 import Machinery from './Machinery';
@@ -15,7 +16,8 @@ const Home = () => {
         <BusinessSummary/>
         <Reviews/>
         <Gallery></Gallery>
-        <DiscountPage></DiscountPage>
+        {/* <DiscountPage></DiscountPage> */}
+        <Contact></Contact>
        </div>
     );
 };

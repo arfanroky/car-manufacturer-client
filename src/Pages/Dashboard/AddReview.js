@@ -65,7 +65,7 @@ const AddReview = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-center my-8 font-bold capitalize md:text-4xl text-2xl">
+      <h1 className="text-center my-12 font-bold capitalize md:text-4xl text-2xl">
         write a <span className="text-warning">review</span>
       </h1>
       <form
